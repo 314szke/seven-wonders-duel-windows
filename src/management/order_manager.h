@@ -14,7 +14,7 @@ public:
 	const std::vector<uint32_t>& getVisibleCoinIDs() const;
 	const std::vector<uint32_t>& getCardIDs(const CardAgeType age) const;
 private:
-	void randomlySelectCards(
+	void randomlySelect(
 		std::vector<uint32_t>& container,
 		const uint32_t start_id, 
 		const uint32_t end_id, 

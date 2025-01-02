@@ -34,7 +34,7 @@ const std::vector<uint32_t>& OrderManager::getCardIDs(const CardAgeType age) con
 	}
 }
 
-void OrderManager::randomlySelectCards(
+void OrderManager::randomlySelect(
 	std::vector<uint32_t>& container,
 	const uint32_t start_id, 
 	const uint32_t end_id, 
@@ -55,20 +55,23 @@ void OrderManager::randomInitialization()
 {
 	int start_idx = 0;
 	int end_idx = NUMBER_OF_PROGRESS_COINS;
-	randomlySelectCards(visible_coin_IDs, start_idx, end_idx, NUMBER_OF_VISIBLE_COINS);
+	randomlySelect(visible_coin_IDs, start_idx, end_idx, NUMBER_OF_VISIBLE_COINS);
 
 	end_idx = NUMBER_OF_FIRST_AGE_CARDS;
-	randomlySelectCards(first_card_IDs, start_idx, end_idx, NUMBER_OF_CARDS_PER_AGE);
+	randomlySelect(first_card_IDs, start_idx, end_idx, NUMBER_OF_CARDS_PER_AGE);
 
 	start_idx = end_idx;
 	end_idx += NUMBER_OF_SECOND_AGE_CARDS;
-	randomlySelectCards(second_card_IDs, start_idx, end_idx, NUMBER_OF_CARDS_PER_AGE);
+	randomlySelect(second_card_IDs, start_idx, end_idx, NUMBER_OF_CARDS_PER_AGE);
 
 	start_idx = end_idx;
 	end_idx += NUMBER_OF_THIRD_AGE_CARDS;
-	randomlySelectCards(third_card_IDs, start_idx, end_idx, (NUMBER_OF_CARDS_PER_AGE - NUMBER_OF_GUILD_CARDS_USED));
+	randomlySelect(third_card_IDs, start_idx, end_idx, (NUMBER_OF_CARDS_PER_AGE - NUMBER_OF_GUILD_CARDS_USED));
 	
 	start_idx = end_idx;
 	end_idx += NUMBER_OF_GUILD_CARDS;
-	randomlySelectCards(third_card_IDs, start_idx, end_idx, NUMBER_OF_GUILD_CARDS_USED);
+	randomlySelect(third_card_IDs, start_idx, end_idx, NUMBER_OF_GUILD_CARDS_USED);
+	
+	// Shuffle the guild cards into the third deck
+	std::shuffle(third_card_IDs.begin(), third_card_IDs.end(), engine);
 }
