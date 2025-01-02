@@ -128,12 +128,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\finance\bank.cpp" />
+    <ClCompile Include="src\finance\market.cpp" />
+    <ClCompile Include="src\finance\material.cpp" />
+    <ClCompile Include="src\finance\material_bundle.cpp" />
     <ClCompile Include="src\seven-wonders-duel-windows.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\enums\exception_types.h" />
+    <ClInclude Include="src\enums\material_types.h" />
     <ClInclude Include="src\enums\player_id.h" />
     <ClInclude Include="src\finance\bank.h" />
+    <ClInclude Include="src\finance\market.h" />
+    <ClInclude Include="src\finance\material.h" />
+    <ClInclude Include="src\finance\material_bundle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
