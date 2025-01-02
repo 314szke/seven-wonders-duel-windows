@@ -136,9 +136,12 @@
     <ClCompile Include="src\finance\material_bundle.cpp" />
     <ClCompile Include="src\game\game_table.cpp" />
     <ClCompile Include="src\game\progress_coin.cpp" />
+    <ClCompile Include="src\management\game_manager.cpp" />
+    <ClCompile Include="src\management\order_manager.cpp" />
     <ClCompile Include="src\seven-wonders-duel-windows.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\constants.h" />
     <ClInclude Include="src\deck\card.h" />
     <ClInclude Include="src\deck\deck.h" />
     <ClInclude Include="src\deck\wonder.h" />
@@ -159,6 +162,8 @@
     <ClInclude Include="src\finance\material_bundle.h" />
     <ClInclude Include="src\game\game_table.h" />
     <ClInclude Include="src\game\progress_coin.h" />
+    <ClInclude Include="src\management\game_manager.h" />
+    <ClInclude Include="src\management\order_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\cards.csv" />

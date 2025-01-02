@@ -34,6 +34,12 @@
     <Filter Include="Header Files\deck">
       <UniqueIdentifier>{8e406c45-eec5-433d-bd7b-544bda51deb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\management">
+      <UniqueIdentifier>{efd5fc36-669d-4568-bc4e-e5677c4a547d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\management">
+      <UniqueIdentifier>{0c3c8d0f-c016-40d1-9fcd-5156a8565fe0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\finance\bank.cpp">
@@ -65,6 +71,12 @@
     </ClCompile>
     <ClCompile Include="src\deck\wonder.cpp">
       <Filter>Source Files\deck</Filter>
+    </ClCompile>
+    <ClCompile Include="src\management\game_manager.cpp">
+      <Filter>Source Files\management</Filter>
+    </ClCompile>
+    <ClCompile Include="src\management\order_manager.cpp">
+      <Filter>Source Files\management</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +139,15 @@
     </ClInclude>
     <ClInclude Include="src\enums\card_age_types.h">
       <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\management\game_manager.h">
+      <Filter>Header Files\management</Filter>
+    </ClInclude>
+    <ClInclude Include="src\management\order_manager.h">
+      <Filter>Header Files\management</Filter>
+    </ClInclude>
+    <ClInclude Include="src\constants.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

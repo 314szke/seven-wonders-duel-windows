@@ -2,7 +2,7 @@
 
 
 enum CardAgeType {
-    FIRST = 1,
-    SECOND = 2,
-    THIRD = 3
+    FIRST_AGE = 1,
+    SECOND_AGE = 2,
+    THIRD_AGE = 3
 };

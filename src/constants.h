@@ -1,5 +1,13 @@
 #pragma once
 
+constexpr auto NUMBER_OF_CARDS_PER_AGE = 20;
+constexpr auto NUMBER_OF_GUILD_CARDS_USED = 20;
+
+constexpr auto NUMBER_OF_FIRST_AGE_CARDS = 23;
+constexpr auto NUMBER_OF_SECOND_AGE_CARDS = 23;
+constexpr auto NUMBER_OF_THIRD_AGE_CARDS = 20;
+constexpr auto NUMBER_OF_GUILD_CARDS = 20;
+
 constexpr auto INITIAL_BANK_FUNDS = 72;
 constexpr auto PLAYER_START_FUND = 7;
 
