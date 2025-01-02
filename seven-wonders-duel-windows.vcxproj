@@ -127,6 +127,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\deck\card.cpp" />
+    <ClCompile Include="src\deck\deck.cpp" />
+    <ClCompile Include="src\deck\wonder.cpp" />
     <ClCompile Include="src\finance\bank.cpp" />
     <ClCompile Include="src\finance\market.cpp" />
     <ClCompile Include="src\finance\material.cpp" />
@@ -136,16 +139,30 @@
     <ClCompile Include="src\seven-wonders-duel-windows.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\deck\card.h" />
+    <ClInclude Include="src\deck\deck.h" />
+    <ClInclude Include="src\deck\wonder.h" />
+    <ClInclude Include="src\enums\card_age_types.h" />
+    <ClInclude Include="src\enums\card_colors.h" />
+    <ClInclude Include="src\enums\chain_symbols.h" />
     <ClInclude Include="src\enums\exception_types.h" />
+    <ClInclude Include="src\enums\guild_actions.h" />
     <ClInclude Include="src\enums\material_types.h" />
+    <ClInclude Include="src\enums\player_dependent_actions.h" />
     <ClInclude Include="src\enums\player_id.h" />
     <ClInclude Include="src\enums\progress_coin_types.h" />
+    <ClInclude Include="src\enums\science_symbols.h" />
+    <ClInclude Include="src\enums\wonder_actions.h" />
     <ClInclude Include="src\finance\bank.h" />
     <ClInclude Include="src\finance\market.h" />
     <ClInclude Include="src\finance\material.h" />
     <ClInclude Include="src\finance\material_bundle.h" />
     <ClInclude Include="src\game\game_table.h" />
     <ClInclude Include="src\game\progress_coin.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\cards.csv" />
+    <None Include="data\wonders.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

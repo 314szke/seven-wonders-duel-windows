@@ -57,6 +57,15 @@
     <ClCompile Include="src\game\progress_coin.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
+    <ClCompile Include="src\deck\card.cpp">
+      <Filter>Source Files\deck</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deck\deck.cpp">
+      <Filter>Source Files\deck</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deck\wonder.cpp">
+      <Filter>Source Files\deck</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\finance\bank.h">
@@ -89,5 +98,43 @@
     <ClInclude Include="src\game\progress_coin.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
+    <ClInclude Include="src\deck\card.h">
+      <Filter>Header Files\deck</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deck\deck.h">
+      <Filter>Header Files\deck</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deck\wonder.h">
+      <Filter>Header Files\deck</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enums\wonder_actions.h">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enums\science_symbols.h">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enums\card_colors.h">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enums\player_dependent_actions.h">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enums\guild_actions.h">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enums\chain_symbols.h">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enums\card_age_types.h">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\cards.csv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="data\wonders.csv">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
