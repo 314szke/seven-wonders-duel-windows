@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "bank.h"
-#include "exception_types.h"
+#include "enums/exception_types.h"
+#include "finance/bank.h"
 
 
 int main()

@@ -2,8 +2,8 @@
 
 #include <stdexcept>
 
-#include "exception_types.h"
-#include "player_id.h"
+#include "../enums/exception_types.h"
+#include "../enums/player_id.h"
 
 
 Bank::Bank() :
