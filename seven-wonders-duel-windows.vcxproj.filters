@@ -40,6 +40,12 @@
     <Filter Include="Header Files\management">
       <UniqueIdentifier>{0c3c8d0f-c016-40d1-9fcd-5156a8565fe0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\io">
+      <UniqueIdentifier>{b25f9698-be45-41a1-b80e-f9f70574e18d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\io">
+      <UniqueIdentifier>{a7947d3f-7d6f-4a0e-a1b5-9280f5a046a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\finance\bank.cpp">
@@ -77,6 +83,21 @@
     </ClCompile>
     <ClCompile Include="src\management\order_manager.cpp">
       <Filter>Source Files\management</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\card_loader.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\parser.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deck\card_cost.cpp">
+      <Filter>Source Files\deck</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deck\card_info.cpp">
+      <Filter>Source Files\deck</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deck\card_gain.cpp">
+      <Filter>Source Files\deck</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +169,24 @@
     </ClInclude>
     <ClInclude Include="src\constants.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\io\card_loader.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="src\io\parser.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deck\card_cost.h">
+      <Filter>Header Files\deck</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enums\card_options.h">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deck\card_info.h">
+      <Filter>Header Files\deck</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deck\card_gain.h">
+      <Filter>Header Files\deck</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

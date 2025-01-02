@@ -128,6 +128,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\deck\card.cpp" />
+    <ClCompile Include="src\deck\card_gain.cpp" />
+    <ClCompile Include="src\deck\card_info.cpp" />
+    <ClCompile Include="src\deck\card_cost.cpp" />
     <ClCompile Include="src\deck\deck.cpp" />
     <ClCompile Include="src\deck\wonder.cpp" />
     <ClCompile Include="src\finance\bank.cpp" />
@@ -136,6 +139,8 @@
     <ClCompile Include="src\finance\material_bundle.cpp" />
     <ClCompile Include="src\game\game_table.cpp" />
     <ClCompile Include="src\game\progress_coin.cpp" />
+    <ClCompile Include="src\io\card_loader.cpp" />
+    <ClCompile Include="src\io\parser.cpp" />
     <ClCompile Include="src\management\game_manager.cpp" />
     <ClCompile Include="src\management\order_manager.cpp" />
     <ClCompile Include="src\seven-wonders-duel-windows.cpp" />
@@ -143,10 +148,14 @@
   <ItemGroup>
     <ClInclude Include="src\constants.h" />
     <ClInclude Include="src\deck\card.h" />
+    <ClInclude Include="src\deck\card_gain.h" />
+    <ClInclude Include="src\deck\card_info.h" />
+    <ClInclude Include="src\deck\card_cost.h" />
     <ClInclude Include="src\deck\deck.h" />
     <ClInclude Include="src\deck\wonder.h" />
     <ClInclude Include="src\enums\card_age_types.h" />
     <ClInclude Include="src\enums\card_colors.h" />
+    <ClInclude Include="src\enums\card_options.h" />
     <ClInclude Include="src\enums\chain_symbols.h" />
     <ClInclude Include="src\enums\exception_types.h" />
     <ClInclude Include="src\enums\guild_actions.h" />
@@ -162,6 +171,8 @@
     <ClInclude Include="src\finance\material_bundle.h" />
     <ClInclude Include="src\game\game_table.h" />
     <ClInclude Include="src\game\progress_coin.h" />
+    <ClInclude Include="src\io\card_loader.h" />
+    <ClInclude Include="src\io\parser.h" />
     <ClInclude Include="src\management\game_manager.h" />
     <ClInclude Include="src\management\order_manager.h" />
   </ItemGroup>

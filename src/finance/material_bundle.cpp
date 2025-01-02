@@ -10,10 +10,10 @@ MaterialBundle::MaterialBundle() :
     glass(0)
 {}
 
-void MaterialBundle::add(const MaterialType type, const uint32_t amount)
+void MaterialBundle::add(const int type, const uint32_t amount)
 {
     empty = false;
-    switch(type) {
+    switch (type) {
         case WOOD : wood += amount; break;
         case CLAY : clay += amount; break;
         case ROCK : rock += amount; break;

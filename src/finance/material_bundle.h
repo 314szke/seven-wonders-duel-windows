@@ -9,7 +9,7 @@ class MaterialBundle {
 public:
     MaterialBundle();
 
-    void add(const MaterialType type, const uint32_t amount);
+    void add(const int type, const uint32_t amount);
 
     bool empty;
 

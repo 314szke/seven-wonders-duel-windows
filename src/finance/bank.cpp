@@ -1,7 +1,5 @@
 #include "bank.h"
 
-#include <stdexcept>
-
 #include "../constants.h"
 #include "../enums/exception_types.h"
 

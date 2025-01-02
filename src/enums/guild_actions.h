@@ -2,7 +2,8 @@
 
 
 enum GuildAction {
-    MONEY_POINT = 0,
+    NO_GUILD_ACTION = -1,
+    MONEY_POINT,
     WONDER_POINT,
     BROWN_GREY_POINT,
     YELLOW_POINT,

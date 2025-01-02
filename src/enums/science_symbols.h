@@ -2,7 +2,8 @@
 
 
 enum ScienceSymbol {
-    GLOBE = 0,
+    NO_SCIENCE = -1,
+    GLOBE,
     WHEEL,
     WATCH,
     MORTAR,

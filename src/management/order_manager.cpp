@@ -4,6 +4,7 @@
 #include <random>
 
 #include "../constants.h"
+#include "../enums/exception_types.h"
 
 
 OrderManager::OrderManager() :
@@ -31,6 +32,7 @@ const std::vector<uint32_t>& OrderManager::getCardIDs(const CardAgeType age) con
 		case FIRST_AGE: return first_card_IDs;
 		case SECOND_AGE: return second_card_IDs;
 		case THIRD_AGE: return third_card_IDs;
+		default: throw DECK_NOT_FOUND;
 	}
 }
 

@@ -2,7 +2,7 @@
 
 
 enum ChainSymbol {
-    NONE = -1,
+    NO_CHAIN = -1,
 // First age
     VASE,        // yellow
     SWORD,       // red
