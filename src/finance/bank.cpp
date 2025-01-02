@@ -3,36 +3,35 @@
 #include <stdexcept>
 
 #include "../enums/exception_types.h"
-#include "../enums/player_id.h"
 
 
 Bank::Bank() :
     fund(INITIAL_FUNDS),
-    player_money(PlayerID::NUMBER_OF_PLAYERS)
+    player_money(NUMBER_OF_PLAYERS)
 {
-    player_money[PlayerID::SIMON] = PLAYER_START_FUND;
-    player_money[PlayerID::ENIKO] = PLAYER_START_FUND;
+    player_money[SIMON] = PLAYER_START_FUND;
+    player_money[ENIKO] = PLAYER_START_FUND;
 }
 
-void Bank::collectFrom(const uint32_t player_id, const uint32_t value) {
+void Bank::collectFrom(const PlayerID player_id, const uint32_t value) {
     if (value > player_money[player_id]) {
-        throw ExceptionType::PLAYER_OUT_OF_BUDGET;
+        throw PLAYER_OUT_OF_BUDGET;
     }
 
     fund += value;
     player_money[player_id] -= value;
 }
 
-void Bank::payTo(const uint32_t player_id, const uint32_t value) {
+void Bank::payTo(const PlayerID player_id, const uint32_t value) {
     if (value > fund) {
-        throw ExceptionType::BANK_OUT_OF_FUNDS;
+        throw BANK_OUT_OF_FUNDS;
     }
 
     fund -= value;
     player_money[player_id] += value;
 }
 
-void Bank::giveMilitaryPenalty(const uint32_t player_id, const uint32_t value)
+void Bank::giveMilitaryPenalty(const PlayerID player_id, const uint32_t value)
 {
     if (value > player_money[player_id]) {
         fund += player_money[player_id];
@@ -44,7 +43,7 @@ void Bank::giveMilitaryPenalty(const uint32_t player_id, const uint32_t value)
     }
 }
 
-bool Bank::creditCheck(const uint32_t player_id, const uint32_t value) const
+bool Bank::creditCheck(const PlayerID player_id, const uint32_t value) const
 {
     if (player_money[player_id] < value) {
         return false;

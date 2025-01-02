@@ -4,16 +4,16 @@
 
 
 Material::Material() :
-    fixed_price(PlayerID::NUMBER_OF_PLAYERS),
-    price(PlayerID::NUMBER_OF_PLAYERS),
-    produce(PlayerID::NUMBER_OF_PLAYERS)
+    fixed_price(NUMBER_OF_PLAYERS),
+    price(NUMBER_OF_PLAYERS),
+    produce(NUMBER_OF_PLAYERS)
 {
-    fixed_price[PlayerID::ENIKO] = false;
-    fixed_price[PlayerID::SIMON] = false;
+    fixed_price[ENIKO] = false;
+    fixed_price[SIMON] = false;
 
-    price[PlayerID::SIMON] = 2;
-    price[PlayerID::ENIKO] = 2;
+    price[SIMON] = 2;
+    price[ENIKO] = 2;
 
-    produce[PlayerID::SIMON] = 0;
-    produce[PlayerID::ENIKO] = 0;
+    produce[SIMON] = 0;
+    produce[ENIKO] = 0;
 }
