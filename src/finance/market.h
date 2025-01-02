@@ -7,9 +7,6 @@
 #include "../enums/player_id.h"
 
 
-#define MATERIAL_NUMBER 5
-
-
 class Market {
 public:
     uint32_t getMaterialBundlePrice(const PlayerID player_id, MaterialBundle& bundle) const;

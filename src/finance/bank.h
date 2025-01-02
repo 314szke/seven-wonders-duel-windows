@@ -4,9 +4,6 @@
 
 #include "../enums/player_id.h"
 
-#define INITIAL_FUNDS 72
-#define PLAYER_START_FUND 7
-
 
 class Bank {
 public:

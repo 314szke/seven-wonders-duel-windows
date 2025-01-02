@@ -1,5 +1,7 @@
 #include "game_table.h"
 
+#include "../constants.h"
+
 
 GameTable::GameTable(const std::vector<uint32_t>& visible_coin_IDs) :
     military_points(NUMBER_OF_PLAYERS),
@@ -11,7 +13,7 @@ GameTable::GameTable(const std::vector<uint32_t>& visible_coin_IDs) :
     penalty[SIMON] = 0;
     penalty[ENIKO] = 0;
 
-    for (uint32_t idx = 0; idx < COIN_COUNTER; idx++) {
+    for (uint32_t idx = 0; idx < NUMBER_OF_PROGRESS_COINS; idx++) {
         progress_coins.push_back(ProgressCoin(idx));
     }
 
@@ -32,14 +34,14 @@ void GameTable::attack(const PlayerID attacker_id, const PlayerID defender_id, B
         military_points[defender_id] = 0;
     }
 
-    if ((military_points[attacker_id] > FIRST_PENALTY) && (penalty[defender_id] < FIRST_PENALTY)) {
-        bank.giveMilitaryPenalty(defender_id, FIRST_PENALTY);
-        penalty[defender_id] += FIRST_PENALTY;
+    if ((military_points[attacker_id] > FIRST_MILITARY_PENALTY) && (penalty[defender_id] < FIRST_MILITARY_PENALTY)) {
+        bank.giveMilitaryPenalty(defender_id, FIRST_MILITARY_PENALTY);
+        penalty[defender_id] += FIRST_MILITARY_PENALTY;
     }
 
-    if ((military_points[attacker_id] > SECOND_PENALTY) && (penalty[defender_id] < SECOND_PENALTY)) {
-        bank.giveMilitaryPenalty(defender_id, SECOND_PENALTY);
-        penalty[defender_id] += SECOND_PENALTY;
+    if ((military_points[attacker_id] > SECOND_MILITARY_PENALTY) && (penalty[defender_id] < SECOND_MILITARY_PENALTY)) {
+        bank.giveMilitaryPenalty(defender_id, SECOND_MILITARY_PENALTY);
+        penalty[defender_id] += SECOND_MILITARY_PENALTY;
     }
 }
 
@@ -53,7 +55,7 @@ bool GameTable::isMilitarySuperior(const PlayerID player_id) const
 
 bool GameTable::isMilitaryWinner(const PlayerID player_id) const
 {
-    if (military_points[player_id] < MILITARY_WIN) {
+    if (military_points[player_id] < MILITARY_WIN_POINTS) {
         return false;
     }
     return true;

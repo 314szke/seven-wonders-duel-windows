@@ -2,11 +2,12 @@
 
 #include <stdexcept>
 
+#include "../constants.h"
 #include "../enums/exception_types.h"
 
 
 Bank::Bank() :
-    fund(INITIAL_FUNDS),
+    fund(INITIAL_BANK_FUNDS),
     player_money(NUMBER_OF_PLAYERS)
 {
     player_money[SIMON] = PLAYER_START_FUND;

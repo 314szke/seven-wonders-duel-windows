@@ -7,12 +7,6 @@
 #include "../finance/bank.h"
 
 
-#define COIN_COUNTER 10
-#define FIRST_PENALTY 2
-#define SECOND_PENALTY 5
-#define MILITARY_WIN 9
-
-
 class GameTable {
 public:
     GameTable(const std::vector<uint32_t>& visible_coin_IDs);
