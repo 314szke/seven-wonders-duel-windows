@@ -1,7 +1,5 @@
 #include "parser.h"
 
-#include <iostream>
-
 #include "../enums/exception_types.h"
 
 
@@ -20,7 +18,6 @@ void Parser::readLine()
     line_counter++;
 
     if (line.empty()) {
-        std::cout << "ERROR: line " << line_counter << " should not be empty!" << std::endl;
         throw FILE_READ_LINE_EMPTY;
     }
 }

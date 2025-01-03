@@ -1,0 +1,10 @@
+#pragma once
+
+
+enum CardState {
+	CARD_UNUSED = -1,
+	CARD_TAKEN,
+	CARD_HIDDEN,
+	CARD_VISIBLE,
+	CARD_VISIBLE_UNAVAILABLE
+};

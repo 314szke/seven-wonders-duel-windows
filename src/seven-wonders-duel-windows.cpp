@@ -9,6 +9,7 @@ int main()
 {
 	try {
 		GameManager manager;
+		manager.setTheThirdStage();
 	}
 	catch (ExceptionType exception) {
 		std::cout << "ERROR: Caught exception with number " << (int) exception << std::endl;

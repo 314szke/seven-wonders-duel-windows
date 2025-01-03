@@ -46,6 +46,12 @@
     <Filter Include="Source Files\io">
       <UniqueIdentifier>{a7947d3f-7d6f-4a0e-a1b5-9280f5a046a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\display">
+      <UniqueIdentifier>{b95704fa-fd8e-4273-a9ed-c3d5357f3890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\display">
+      <UniqueIdentifier>{e87b317b-e7b9-4500-a34a-e2d82400a963}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\finance\bank.cpp">
@@ -98,6 +104,12 @@
     </ClCompile>
     <ClCompile Include="src\deck\card_gain.cpp">
       <Filter>Source Files\deck</Filter>
+    </ClCompile>
+    <ClCompile Include="src\management\card_manager.cpp">
+      <Filter>Source Files\management</Filter>
+    </ClCompile>
+    <ClCompile Include="src\display\deck_displayer.cpp">
+      <Filter>Source Files\display</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +199,15 @@
     </ClInclude>
     <ClInclude Include="src\deck\card_gain.h">
       <Filter>Header Files\deck</Filter>
+    </ClInclude>
+    <ClInclude Include="src\management\card_manager.h">
+      <Filter>Header Files\management</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enums\card_states.h">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\display\deck_displayer.h">
+      <Filter>Header Files\display</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

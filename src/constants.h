@@ -3,7 +3,6 @@
 constexpr auto TOTAL_NUMBER_OF_CARDS = 73;
 constexpr auto NUMBER_OF_CARDS_PER_AGE = 20;
 constexpr auto NUMBER_OF_GUILD_CARDS_USED = 3;
-constexpr auto MAX_NUMBER_OF_VISIBLE_CARDS = 6;
 
 constexpr auto NUMBER_OF_FIRST_AGE_CARDS = 23;
 constexpr auto NUMBER_OF_SECOND_AGE_CARDS = 23;

@@ -1,6 +1,6 @@
 #include "card_loader.h"
 
-#include <iostream>
+#include <filesystem>
 #include <regex>
 
 #include "../enums/exception_types.h"
@@ -8,13 +8,18 @@
 #include "../constants.h"
 
 
-static const std::string CARD_FILE = "../../data/cards.csv";
+static const std::filesystem::path CARD_FILE = "\\data\\cards.csv";
 static const std::regex CARD_DETAILS_PATTERN("([0-9][0-9]?);([1-3]);([0-6]);([0-8]);(-|[0-4]|(?:(?:[0-4],)+[0-4]));(-|[0-9][0-9]?);(0|4|6);([0-7]);([0-3]);(0|1);(0|1);(-|[0-4]|(?:(?:[0-4],)+[0-4]));(-|[0-9][0-9]?);(-|[0-5]);(-|[0-4]);(-|[0-6])\\r?\\n?");
 
 
 CardLoader::CardLoader()
 {
-	f_in.open(CARD_FILE);
+	std::filesystem::path card_file_path = std::filesystem::current_path();
+	card_file_path += CARD_FILE;
+	f_in.open(card_file_path);
+	if (!f_in.is_open()) {
+		throw FILE_NOT_FOUND;
+	}
 
 	// Skip the header in the CSV file
 	readLine(); 
@@ -29,15 +34,17 @@ CardLoader::CardLoader()
 			throw FILE_READ_CARD_REGEX_FAIL;
 		}
 	}
+
+	f_in.close();
 }
 
-const Card& CardLoader::getCard(const uint32_t card_id) const
+Card* CardLoader::getCard(const uint32_t card_id)
 {
 	if (card_id > cards.size()) {
 		throw CARD_INDEX_OUT_OF_BOUND;
 	}
 	
-	return cards[card_id];
+	return &cards[card_id];
 }
 
 void CardLoader::parseCardDetails(const uint32_t card_id, const std::smatch& match)

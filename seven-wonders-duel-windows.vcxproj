@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,6 +134,7 @@
     <ClCompile Include="src\deck\card_cost.cpp" />
     <ClCompile Include="src\deck\deck.cpp" />
     <ClCompile Include="src\deck\wonder.cpp" />
+    <ClCompile Include="src\display\deck_displayer.cpp" />
     <ClCompile Include="src\finance\bank.cpp" />
     <ClCompile Include="src\finance\market.cpp" />
     <ClCompile Include="src\finance\material.cpp" />
@@ -141,6 +143,7 @@
     <ClCompile Include="src\game\progress_coin.cpp" />
     <ClCompile Include="src\io\card_loader.cpp" />
     <ClCompile Include="src\io\parser.cpp" />
+    <ClCompile Include="src\management\card_manager.cpp" />
     <ClCompile Include="src\management\game_manager.cpp" />
     <ClCompile Include="src\management\order_manager.cpp" />
     <ClCompile Include="src\seven-wonders-duel-windows.cpp" />
@@ -153,9 +156,11 @@
     <ClInclude Include="src\deck\card_cost.h" />
     <ClInclude Include="src\deck\deck.h" />
     <ClInclude Include="src\deck\wonder.h" />
+    <ClInclude Include="src\display\deck_displayer.h" />
     <ClInclude Include="src\enums\card_age_types.h" />
     <ClInclude Include="src\enums\card_colors.h" />
     <ClInclude Include="src\enums\card_options.h" />
+    <ClInclude Include="src\enums\card_states.h" />
     <ClInclude Include="src\enums\chain_symbols.h" />
     <ClInclude Include="src\enums\exception_types.h" />
     <ClInclude Include="src\enums\guild_actions.h" />
@@ -173,6 +178,7 @@
     <ClInclude Include="src\game\progress_coin.h" />
     <ClInclude Include="src\io\card_loader.h" />
     <ClInclude Include="src\io\parser.h" />
+    <ClInclude Include="src\management\card_manager.h" />
     <ClInclude Include="src\management\game_manager.h" />
     <ClInclude Include="src\management\order_manager.h" />
   </ItemGroup>
