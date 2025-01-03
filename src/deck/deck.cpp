@@ -6,14 +6,18 @@
 #include "../enums/exception_types.h"
 
 
-Deck::Deck(const OrderManager& order_manager) :
+Deck::Deck(const OrderManager& manager) :
 	current_age(NO_AGE),
+	number_of_cards_taken(0),
+	order_manager(manager),
 	card_manager(order_manager)
 {}
 
 void Deck::prepareTheFirstAge()
 {
-	current_age = FIRST_AGE;
+	card_manager.reset();
+	prepareAge(FIRST_AGE);
+
 	card_manager.fill(first_row_cards, 6, FIRST_AGE, CARD_VISIBLE);
 	last_row_cards = arrangeCardPyramid(first_row_cards, FIRST_AGE, 5, 2);
 	visible_cards = first_row_cards;
@@ -21,7 +25,8 @@ void Deck::prepareTheFirstAge()
 
 void Deck::prepareTheSecondAge()
 {
-	current_age = SECOND_AGE;
+	prepareAge(SECOND_AGE);
+
 	card_manager.fill(first_row_cards, 2, SECOND_AGE, CARD_VISIBLE);
 	last_row_cards = arrangeCardInversePyramid(first_row_cards, SECOND_AGE, 3, 6);
 	visible_cards = first_row_cards;
@@ -29,7 +34,7 @@ void Deck::prepareTheSecondAge()
 
 void Deck::prepareTheThirdAge()
 {
-	current_age = THIRD_AGE;
+	prepareAge(THIRD_AGE);
 
 	// Inverse pyramid section
 	card_manager.fill(first_row_cards, 2, THIRD_AGE, CARD_VISIBLE);
@@ -49,7 +54,7 @@ void Deck::prepareTheThirdAge()
 
 void Deck::displayDeck()
 {
-	deck_displayer.show(current_age, first_row_cards, last_row_cards);
+	deck_displayer.show(current_age, last_row_cards);
 }
 
 const std::vector<Card*>& Deck::getVisibleCards() const
@@ -60,12 +65,36 @@ const std::vector<Card*>& Deck::getVisibleCards() const
 void Deck::takeCard(const uint32_t visible_card_idx)
 {
 	visible_cards[visible_card_idx]->state = CARD_TAKEN;
+	number_of_cards_taken++;
 
 	Card* parent_left = visible_cards[visible_card_idx]->parent_left;
 	Card* parent_right = visible_cards[visible_card_idx]->parent_right;
 
 	makeParentVisible(parent_left);
 	makeParentVisible(parent_right);
+}
+
+bool Deck::isAgeOn() const
+{
+	if (number_of_cards_taken >= NUMBER_OF_CARDS_PER_AGE) {
+		return false;
+	}
+	return true;
+}
+
+CardAgeType Deck::getCurrentAge() const
+{
+	return current_age;
+}
+
+void Deck::prepareAge(const CardAgeType age)
+{
+	current_age = age;
+	number_of_cards_taken = 0;
+
+	visible_cards.resize(0);
+	first_row_cards.resize(0);
+	last_row_cards.resize(0);
 }
 
 std::vector<Card*> Deck::arrangeCardPyramid(
@@ -89,13 +118,15 @@ std::vector<Card*> Deck::arrangeCardPyramid(
 		}
 		face_up = !face_up;
 
-		for (uint32_t idx = 0; idx < cards_per_row; idx++) {
-			previous_row[idx]->parent_right = current_row[idx];
+		for (uint32_t idx = 0; idx < previous_row.size(); idx++) {
 			if (idx != 0) {
 				previous_row[idx]->parent_left = current_row[(idx - 1)];
 			}
-			current_row[idx]->child_left = previous_row[idx];
-			current_row[idx]->child_right = previous_row[(idx + 1)];
+			if (idx < (previous_row.size() - 1)) {
+				previous_row[idx]->parent_right = current_row[idx];
+				current_row[idx]->child_left = previous_row[idx];
+				current_row[idx]->child_right = previous_row[(idx + 1)];
+			}
 		}
 
 		previous_row = current_row;
@@ -126,14 +157,14 @@ std::vector<Card*> Deck::arrangeCardInversePyramid(
 		}
 		face_up = !face_up;
 
-		for (uint32_t idx = 0; idx < cards_per_row; idx++) {
-			if (idx < (cards_per_row - 1)) {
-				current_row[idx]->child_right = previous_row[idx];
-				previous_row[idx]->parent_left = current_row[idx];
-			}
+		for (uint32_t idx = 0; idx < current_row.size(); idx++) {
 			if (idx != 0) {
 				current_row[idx]->child_left = previous_row[(idx - 1)];
 				previous_row[(idx - 1)]->parent_right = current_row[idx];
+			}
+			if (idx < (current_row.size() - 1)) {
+				current_row[idx]->child_right = previous_row[idx];
+				previous_row[idx]->parent_left = current_row[idx];
 			}
 		}
 
@@ -194,5 +225,5 @@ void Deck::makeParentVisible(Card* parent)
 		}
 	}
 
-	throw DECK_TOO_MANY_VISIBLE_CARDS;
+	visible_cards.push_back(parent);
 }

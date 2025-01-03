@@ -8,36 +8,35 @@
 constexpr auto FIRST_AGE_NUMBER_OF_ROWS = 5;
 constexpr auto SECOND_AGE_NUMBER_OF_ROWS = 5;
 
-constexpr auto NUMBER_OF_SEPERATING_SPACES = 2;
-constexpr auto SEPERATING_SPACES = "  ";
-constexpr auto THIRD_AGE_MAX_LENGTH = 14; // 4 cards + SEPARATING_SPACES
+constexpr auto NUMBER_OF_SEPERATING_SPACES = 3;
+constexpr auto SEPERATING_SPACES = "   ";
+constexpr auto MAX_ROW_LENGTH = 28; // 6 cards + SEPARATING_SPACES
 
 
-void DeckDisplayer::show(const CardAgeType card_age, const std::vector<Card*>& first_row_in_deck, const std::vector<Card*>& last_row_in_deck)
+void DeckDisplayer::show(const CardAgeType card_age, const std::vector<Card*>& last_row_in_deck)
 {
 	switch (card_age) {
-		case FIRST_AGE: showFirstAge(first_row_in_deck, last_row_in_deck); break;
-		case SECOND_AGE: showSecondAge(first_row_in_deck, last_row_in_deck); break;
-		case THIRD_AGE: showThirdAge(first_row_in_deck, last_row_in_deck); break;
+		case FIRST_AGE: showFirstAge(last_row_in_deck); break;
+		case SECOND_AGE: showSecondAge(last_row_in_deck); break;
+		case THIRD_AGE: showThirdAge(last_row_in_deck); break;
 		default: throw DECK_NOT_FOUND;
 	}
+	std::cout << std::endl;
 }
 
-void DeckDisplayer::showFirstAge(const std::vector<Card*>& first_row_in_deck, const std::vector<Card*>& last_row_in_deck)
+void DeckDisplayer::showFirstAge(const std::vector<Card*>& last_row_in_deck)
 {
-	uint32_t max_length = getEvenLength(first_row_in_deck);
-	printPyramid(last_row_in_deck, FIRST_AGE_NUMBER_OF_ROWS, max_length);
+	printPyramid(last_row_in_deck, FIRST_AGE_NUMBER_OF_ROWS);
 }
 
-void DeckDisplayer::showSecondAge(const std::vector<Card*>& first_row_in_deck, const std::vector<Card*>& last_row_in_deck)
+void DeckDisplayer::showSecondAge(const std::vector<Card*>& last_row_in_deck)
 {
-	uint32_t max_length = getEvenLength(last_row_in_deck);
-	printInversePyramid(last_row_in_deck, SECOND_AGE_NUMBER_OF_ROWS, max_length);
+	printInversePyramid(last_row_in_deck, SECOND_AGE_NUMBER_OF_ROWS);
 }
 
-void DeckDisplayer::showThirdAge(const std::vector<Card*>& first_row_in_deck, const std::vector<Card*>& last_row_in_deck)
+void DeckDisplayer::showThirdAge(const std::vector<Card*>& last_row_in_deck)
 {
-	std::vector<Card*> previous_row = printPyramid(last_row_in_deck, 3, THIRD_AGE_MAX_LENGTH);
+	std::vector<Card*> previous_row = printPyramid(last_row_in_deck, 3);
 	std::vector<Card*> middle_row = { previous_row[0]->child_right , previous_row[2]->child_right };
 	std::vector<Card*> next_row = { 
 		middle_row[0]->child_left, 
@@ -45,8 +44,8 @@ void DeckDisplayer::showThirdAge(const std::vector<Card*>& first_row_in_deck, co
 		middle_row[1]->child_left, 
 		middle_row[1]->child_right };
 	
-	printThirdAgeMiddleRow(middle_row, THIRD_AGE_MAX_LENGTH);
-	printInversePyramid(next_row, 3, THIRD_AGE_MAX_LENGTH);
+	printThirdAgeMiddleRow(middle_row);
+	printInversePyramid(next_row, 3);
 }
 
 uint32_t DeckDisplayer::getLength(const std::vector<Card*>& row)
@@ -80,7 +79,7 @@ uint32_t DeckDisplayer::getEvenLength(const std::vector<Card*>& row)
 	return (length + extra_length);
 }
 
-std::vector<Card*> DeckDisplayer::printPyramid(const std::vector<Card*>& start_row, const uint32_t number_of_rows, const uint32_t max_length)
+std::vector<Card*> DeckDisplayer::printPyramid(const std::vector<Card*>& start_row, const uint32_t number_of_rows)
 {
 	std::vector<Card*> previous_row = start_row;
 	std::vector<Card*> current_row;
@@ -92,15 +91,15 @@ std::vector<Card*> DeckDisplayer::printPyramid(const std::vector<Card*>& start_r
 		}
 		current_row.push_back(previous_row.back()->child_right);
 
-		printRow(previous_row, max_length);
+		printRow(previous_row);
 		previous_row = current_row;
 	}
 
-	printRow(previous_row, max_length);
+	printRow(previous_row);
 	return previous_row;
 }
 
-std::vector<Card*> DeckDisplayer::printInversePyramid(const std::vector<Card*>& start_row, const uint32_t number_of_rows, const uint32_t max_length)
+std::vector<Card*> DeckDisplayer::printInversePyramid(const std::vector<Card*>& start_row, const uint32_t number_of_rows)
 {
 	std::vector<Card*> previous_row = start_row;
 	std::vector<Card*> current_row;
@@ -111,26 +110,26 @@ std::vector<Card*> DeckDisplayer::printInversePyramid(const std::vector<Card*>& 
 			current_row.push_back(previous_row[idx]->child_right);
 		}
 
-		printRow(previous_row, max_length);
+		printRow(previous_row);
 		previous_row = current_row;
 	}
 
-	printRow(previous_row, max_length);
+	printRow(previous_row);
 	return previous_row;
 }
 
-void DeckDisplayer::printThirdAgeMiddleRow(const std::vector<Card*>& row, const uint32_t max_length)
+void DeckDisplayer::printThirdAgeMiddleRow(const std::vector<Card*>& row)
 {
 	// Imitate having a third card in the middle
 	uint32_t length = getLength(row);
 	uint32_t extra_middle_space = 1 + (2 * NUMBER_OF_SEPERATING_SPACES);
 	uint32_t even_length = getEvenLength(row) + extra_middle_space;
 
-	if (max_length < even_length) {
+	if (MAX_ROW_LENGTH < even_length) {
 		throw DISPLAY_ROW_MISMATCH;
 	}
 
-	for (uint32_t idx = 0; idx < ((max_length - even_length) / 2); idx++) {
+	for (uint32_t idx = 0; idx < ((MAX_ROW_LENGTH - even_length) / 2); idx++) {
 		std::cout << " ";
 	}
 
@@ -167,16 +166,16 @@ void DeckDisplayer::printThirdAgeMiddleRow(const std::vector<Card*>& row, const 
 	std::cout << std::endl;
 }
 
-void DeckDisplayer::printRow(const std::vector<Card*>& row, const uint32_t max_length)
+void DeckDisplayer::printRow(const std::vector<Card*>& row)
 {
 	uint32_t length = getLength(row);
 	uint32_t even_length = getEvenLength(row);
 
-	if (max_length < even_length) {
+	if (MAX_ROW_LENGTH < even_length) {
 		throw DISPLAY_ROW_MISMATCH;
 	}
 	
-	for (uint32_t idx = 0; idx < ((max_length - even_length) / 2); idx++) {
+	for (uint32_t idx = 0; idx < ((MAX_ROW_LENGTH - even_length) / 2); idx++) {
 		std::cout << " ";
 	}
 

@@ -10,7 +10,7 @@
 
 class Deck {
 public:
-	Deck(const OrderManager& order_manager);
+	Deck(const OrderManager& manager);
 
 	void prepareTheFirstAge();
 	void prepareTheSecondAge();
@@ -20,7 +20,13 @@ public:
 
 	const std::vector<Card*>& getVisibleCards() const;
 	void takeCard(const uint32_t visible_card_idx);
+	
+	bool isAgeOn() const;
+	CardAgeType getCurrentAge() const;
+
 private:
+	void prepareAge(const CardAgeType age);
+
 	std::vector<Card*> arrangeCardPyramid(
 		const std::vector<Card*>& init_previous_row,
 		const CardAgeType card_age, 
@@ -41,6 +47,9 @@ private:
 	void makeParentVisible(Card* parent);
 
 	CardAgeType current_age;
+	uint32_t number_of_cards_taken;
+
+	const OrderManager& order_manager;
 	CardManager card_manager;
 	DeckDisplayer deck_displayer;
 

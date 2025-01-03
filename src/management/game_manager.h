@@ -16,7 +16,13 @@ public:
     void setTheSecondStage();
     void setTheThirdStage();
 
+    bool gameIsOn();
+    void showTable();
+
+    void takeCardFromConsol(const uint32_t consol_card_id);
+
 private:
+    const int random_seed;
     OrderManager order_manger;
 
     Deck deck;

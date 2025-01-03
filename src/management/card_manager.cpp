@@ -15,6 +15,13 @@ CardManager::CardManager(const OrderManager& order_manager) :
 	third_idx(0)
 {}
 
+void CardManager::reset()
+{
+	first_idx = 0;
+	second_idx = 0;
+	third_idx = 0;
+}
+
 void CardManager::fill(
 	std::vector<Card*>& container, 
 	const uint32_t card_number, 
