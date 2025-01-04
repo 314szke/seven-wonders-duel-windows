@@ -5,11 +5,12 @@
 #include "progress_coin.h"
 #include "../enums/player_id.h"
 #include "../finance/bank.h"
+#include "../management/order_manager.h"
 
 
 class GameTable {
 public:
-    GameTable(const std::vector<uint32_t>& visible_coin_IDs);
+    GameTable(const OrderManager& order_manager);
 
     void attack(const PlayerID attacker_id, const PlayerID defender_id, Bank& bank, uint32_t severity);
     bool isMilitarySuperior(const PlayerID player_id) const;

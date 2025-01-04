@@ -8,5 +8,6 @@ enum CardColor {
     RED,
     GREEN,
     BLUE,
-    PURPLE
+    PURPLE,
+    NUMBER_OF_CARD_COLORS
 };

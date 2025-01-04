@@ -3,7 +3,7 @@
 #include "../constants.h"
 
 
-GameTable::GameTable(const std::vector<uint32_t>& visible_coin_IDs) :
+GameTable::GameTable(const OrderManager& order_manager) :
     military_points(NUMBER_OF_PLAYERS),
     penalty(NUMBER_OF_PLAYERS)
 {
@@ -17,7 +17,7 @@ GameTable::GameTable(const std::vector<uint32_t>& visible_coin_IDs) :
         progress_coins.push_back(ProgressCoin(idx));
     }
 
-    for (uint32_t idx : visible_coin_IDs) {
+    for (uint32_t idx : order_manager.getVisibleCoinIDs()) {
         progress_coins[idx].setVisible();
     }
 }

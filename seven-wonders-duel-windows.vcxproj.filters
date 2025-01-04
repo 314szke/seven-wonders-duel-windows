@@ -52,6 +52,12 @@
     <Filter Include="Source Files\display">
       <UniqueIdentifier>{e87b317b-e7b9-4500-a34a-e2d82400a963}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\player">
+      <UniqueIdentifier>{e0241829-0b0a-4aa6-bdfe-afd7c3a64887}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\player">
+      <UniqueIdentifier>{31f77474-a7c4-4e0d-b955-ec33ff60543b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\finance\bank.cpp">
@@ -110,6 +116,24 @@
     </ClCompile>
     <ClCompile Include="src\display\deck_displayer.cpp">
       <Filter>Source Files\display</Filter>
+    </ClCompile>
+    <ClCompile Include="src\player\player.cpp">
+      <Filter>Source Files\player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\display\player_displayer.cpp">
+      <Filter>Source Files\display</Filter>
+    </ClCompile>
+    <ClCompile Include="src\player\robot_player.cpp">
+      <Filter>Source Files\player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\player\consol_player.cpp">
+      <Filter>Source Files\player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\consol_input.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\game.cpp">
+      <Filter>Source Files\game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +232,27 @@
     </ClInclude>
     <ClInclude Include="src\display\deck_displayer.h">
       <Filter>Header Files\display</Filter>
+    </ClInclude>
+    <ClInclude Include="src\player\player.h">
+      <Filter>Header Files\player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\player\consol_player.h">
+      <Filter>Header Files\player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\display\player_displayer.h">
+      <Filter>Header Files\display</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enums\player_types.h">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\player\robot_player.h">
+      <Filter>Header Files\player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\io\consol_input.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\game.h">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

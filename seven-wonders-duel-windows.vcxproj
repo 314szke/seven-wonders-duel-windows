@@ -135,17 +135,23 @@
     <ClCompile Include="src\deck\deck.cpp" />
     <ClCompile Include="src\deck\wonder.cpp" />
     <ClCompile Include="src\display\deck_displayer.cpp" />
+    <ClCompile Include="src\display\player_displayer.cpp" />
     <ClCompile Include="src\finance\bank.cpp" />
     <ClCompile Include="src\finance\market.cpp" />
     <ClCompile Include="src\finance\material.cpp" />
     <ClCompile Include="src\finance\material_bundle.cpp" />
+    <ClCompile Include="src\game\game.cpp" />
     <ClCompile Include="src\game\game_table.cpp" />
     <ClCompile Include="src\game\progress_coin.cpp" />
     <ClCompile Include="src\io\card_loader.cpp" />
+    <ClCompile Include="src\io\consol_input.cpp" />
     <ClCompile Include="src\io\parser.cpp" />
     <ClCompile Include="src\management\card_manager.cpp" />
     <ClCompile Include="src\management\game_manager.cpp" />
     <ClCompile Include="src\management\order_manager.cpp" />
+    <ClCompile Include="src\player\consol_player.cpp" />
+    <ClCompile Include="src\player\player.cpp" />
+    <ClCompile Include="src\player\robot_player.cpp" />
     <ClCompile Include="src\seven-wonders-duel-windows.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +163,7 @@
     <ClInclude Include="src\deck\deck.h" />
     <ClInclude Include="src\deck\wonder.h" />
     <ClInclude Include="src\display\deck_displayer.h" />
+    <ClInclude Include="src\display\player_displayer.h" />
     <ClInclude Include="src\enums\card_age_types.h" />
     <ClInclude Include="src\enums\card_colors.h" />
     <ClInclude Include="src\enums\card_options.h" />
@@ -167,6 +174,7 @@
     <ClInclude Include="src\enums\material_types.h" />
     <ClInclude Include="src\enums\player_dependent_actions.h" />
     <ClInclude Include="src\enums\player_id.h" />
+    <ClInclude Include="src\enums\player_types.h" />
     <ClInclude Include="src\enums\progress_coin_types.h" />
     <ClInclude Include="src\enums\science_symbols.h" />
     <ClInclude Include="src\enums\wonder_actions.h" />
@@ -174,13 +182,18 @@
     <ClInclude Include="src\finance\market.h" />
     <ClInclude Include="src\finance\material.h" />
     <ClInclude Include="src\finance\material_bundle.h" />
+    <ClInclude Include="src\game\game.h" />
     <ClInclude Include="src\game\game_table.h" />
     <ClInclude Include="src\game\progress_coin.h" />
     <ClInclude Include="src\io\card_loader.h" />
+    <ClInclude Include="src\io\consol_input.h" />
     <ClInclude Include="src\io\parser.h" />
     <ClInclude Include="src\management\card_manager.h" />
     <ClInclude Include="src\management\game_manager.h" />
     <ClInclude Include="src\management\order_manager.h" />
+    <ClInclude Include="src\player\consol_player.h" />
+    <ClInclude Include="src\player\player.h" />
+    <ClInclude Include="src\player\robot_player.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\cards.csv" />

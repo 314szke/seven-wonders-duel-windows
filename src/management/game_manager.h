@@ -1,32 +1,33 @@
 #pragma once
 
-#include "order_manager.h"
 
-#include "../deck/deck.h"
-#include "../finance/bank.h"
-#include "../finance/market.h"
-#include "../game/game_table.h"
+#include "../enums/player_id.h"
+#include "../display/player_displayer.h"
+#include "../game/game.h"
+#include "../player/player.h"
 
 
 class GameManager {
 public:
-    GameManager();
+    GameManager(Game& game_ref);
     
-    void setTheFirstStage();
-    void setTheSecondStage();
-    void setTheThirdStage();
+    void initializePlayers();
+    void initalizeGame();
 
     bool gameIsOn();
     void showTable();
-
-    void takeCardFromConsol(const uint32_t consol_card_id);
+    void handleTurn();
 
 private:
-    const int random_seed;
-    OrderManager order_manger;
+    void handleCard(std::unique_ptr<Player>& player, const uint32_t card_id);
 
-    Deck deck;
-    Bank bank;
-    Market market;
-    GameTable table;
+    Game& game;
+
+    std::unique_ptr<Player> Simon;
+    std::unique_ptr<Player> Eniko;
+
+    PlayerID current_player;
+    PlayerID next_player;
+
+    PlayerDisplayer player_displayer;
 };
