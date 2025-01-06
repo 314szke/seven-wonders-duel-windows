@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "../display/deck_displayer.h"
+#include "../display/player_displayer.h"
 #include "../io/consol_input.h"
 #include "../player/consol_player.h"
 #include "../player/robot_player.h"
@@ -10,20 +12,19 @@
 GameManager::GameManager(Game& game_ref) :
 	game(game_ref),
 	current_player(SIMON),
-	next_player(ENIKO),
-	player_displayer(game_ref)
+	next_player(ENIKO)
 {}
 
 void GameManager::initializePlayers()
 {
-	switch (ConsolInput::readPlayerOption(SIMON)) {
-		case CONSOL_PLAYER: Simon.reset(new ConsolPlayer(SIMON, ConsolInput::readPlayerName(SIMON))); break;
-		case ROBOT_PLAYER: Simon.reset(new RobotPlayer(SIMON, ConsolInput::readPlayerName(SIMON))); break;
+	switch (ConsolInput::ReadPlayerOption(SIMON)) {
+		case CONSOL_PLAYER: Simon.reset(new ConsolPlayer(SIMON, ConsolInput::ReadPlayerName(SIMON))); break;
+		case ROBOT_PLAYER: Simon.reset(new RobotPlayer(SIMON, ConsolInput::ReadPlayerName(SIMON))); break;
 	}
 	
-	switch (ConsolInput::readPlayerOption(ENIKO)) {
-		case CONSOL_PLAYER: Eniko.reset(new ConsolPlayer(ENIKO, ConsolInput::readPlayerName(ENIKO))); break;
-		case ROBOT_PLAYER: Eniko.reset(new RobotPlayer(ENIKO, ConsolInput::readPlayerName(ENIKO))); break;
+	switch (ConsolInput::ReadPlayerOption(ENIKO)) {
+		case CONSOL_PLAYER: Eniko.reset(new ConsolPlayer(ENIKO, ConsolInput::ReadPlayerName(ENIKO))); break;
+		case ROBOT_PLAYER: Eniko.reset(new RobotPlayer(ENIKO, ConsolInput::ReadPlayerName(ENIKO))); break;
 	}
 }
 
@@ -34,26 +35,26 @@ void GameManager::initalizeGame()
 	next_player = ENIKO;
 }
 
-bool GameManager::gameIsOn()
+bool GameManager::gameIsOn() const
 {
 	if (game.deck.isAgeOn()) {
 		return true;
 	}
 
-	switch (game.deck.getCurrentAge()) {
-		case FIRST_AGE: game.deck.prepareTheSecondAge(); break;
-		case SECOND_AGE: game.deck.prepareTheThirdAge(); break;
+	switch (game.age) {
+		case FIRST_AGE: game.deck.prepareTheSecondAge(); game.age = SECOND_AGE; break;
+		case SECOND_AGE: game.deck.prepareTheThirdAge(); game.age = THIRD_AGE; break;
 		case THIRD_AGE: return false;
 	}
 
 	return false;
 }
 
-void GameManager::showTable()
+void GameManager::showTable() const
 {
-	game.deck.displayDeck();
-	player_displayer.show(Simon);
-	player_displayer.show(Eniko);
+	DeckDisplayer::Show(game.age, game.deck.getCurrentDeck());
+	PlayerDisplayer::Show(Simon, game);
+	PlayerDisplayer::Show(Eniko, game);
 }
 
 void GameManager::handleTurn()

@@ -8,10 +8,5 @@
 
 class PlayerDisplayer {
 public:
-	PlayerDisplayer(Game& game_ref);
-
-	void show(const std::unique_ptr<Player>& player);
-
-private:
-	Game& game;
+	static void Show(const std::unique_ptr<Player>& player, const Game& game);
 };

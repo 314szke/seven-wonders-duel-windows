@@ -11,7 +11,7 @@ static const std::regex PLAYER_NAME_REGEX("[A-Za-z]+");
 static const std::regex CARD_ID_REGEX("[0-9][0-9]?");
 
 
-PlayerType ConsolInput::readPlayerOption(const PlayerID player_id)
+PlayerType ConsolInput::ReadPlayerOption(const PlayerID player_id)
 {
 	std::string line;
 	std::smatch regex_match;
@@ -45,7 +45,7 @@ PlayerType ConsolInput::readPlayerOption(const PlayerID player_id)
 	throw CONSOL_NO_PLAYER_TYPE;
 }
 
-std::string ConsolInput::readPlayerName(const PlayerID player_id)
+std::string ConsolInput::ReadPlayerName(const PlayerID player_id)
 {
 	std::string line;
 	std::smatch regex_match;
@@ -66,7 +66,7 @@ std::string ConsolInput::readPlayerName(const PlayerID player_id)
 	throw CONSOL_NO_PLAYER_NAME;
 }
 
-uint32_t ConsolInput::readCardID()
+uint32_t ConsolInput::ReadCardID()
 {
 	std::string line;
 	std::smatch regex_match;

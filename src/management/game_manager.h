@@ -2,7 +2,6 @@
 
 
 #include "../enums/player_id.h"
-#include "../display/player_displayer.h"
 #include "../game/game.h"
 #include "../player/player.h"
 
@@ -14,8 +13,8 @@ public:
     void initializePlayers();
     void initalizeGame();
 
-    bool gameIsOn();
-    void showTable();
+    bool gameIsOn() const;
+    void showTable() const;
     void handleTurn();
 
 private:
@@ -28,6 +27,4 @@ private:
 
     PlayerID current_player;
     PlayerID next_player;
-
-    PlayerDisplayer player_displayer;
 };

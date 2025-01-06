@@ -6,17 +6,15 @@
 #include "../enums/exception_types.h"
 
 
-Deck::Deck(const OrderManager& manager) :
-	current_age(NO_AGE),
-	number_of_cards_taken(0),
-	order_manager(manager),
-	card_manager(order_manager)
+Deck::Deck(const OrderManager& order_manager) :
+	card_manager(order_manager),
+	number_of_cards_taken(0)
 {}
 
 void Deck::prepareTheFirstAge()
 {
 	card_manager.reset();
-	prepareAge(FIRST_AGE);
+	prepareAge();
 
 	card_manager.fill(first_row_cards, 6, FIRST_AGE, CARD_VISIBLE);
 	last_row_cards = arrangeCardPyramid(first_row_cards, FIRST_AGE, 5, 2);
@@ -25,7 +23,7 @@ void Deck::prepareTheFirstAge()
 
 void Deck::prepareTheSecondAge()
 {
-	prepareAge(SECOND_AGE);
+	prepareAge();
 
 	card_manager.fill(first_row_cards, 2, SECOND_AGE, CARD_VISIBLE);
 	last_row_cards = arrangeCardInversePyramid(first_row_cards, SECOND_AGE, 3, 6);
@@ -34,7 +32,7 @@ void Deck::prepareTheSecondAge()
 
 void Deck::prepareTheThirdAge()
 {
-	prepareAge(THIRD_AGE);
+	prepareAge();
 
 	// Inverse pyramid section
 	card_manager.fill(first_row_cards, 2, THIRD_AGE, CARD_VISIBLE);
@@ -52,9 +50,9 @@ void Deck::prepareTheThirdAge()
 	visible_cards = first_row_cards;
 }
 
-void Deck::displayDeck()
+const std::vector<Card*>& Deck::getCurrentDeck() const
 {
-	deck_displayer.show(current_age, last_row_cards);
+	return last_row_cards;
 }
 
 const std::vector<Card*>& Deck::getVisibleCards() const
@@ -64,6 +62,14 @@ const std::vector<Card*>& Deck::getVisibleCards() const
 
 void Deck::takeCard(const uint32_t visible_card_idx)
 {
+	if (visible_card_idx > visible_cards.size()) {
+		throw CARD_INDEX_OUT_OF_BOUND;
+	}
+
+	if (visible_cards[visible_card_idx]->state != CARD_VISIBLE) {
+		throw CARD_INVALID_STATE;
+	}
+
 	visible_cards[visible_card_idx]->state = CARD_TAKEN;
 	number_of_cards_taken++;
 
@@ -82,14 +88,8 @@ bool Deck::isAgeOn() const
 	return true;
 }
 
-CardAgeType Deck::getCurrentAge() const
+void Deck::prepareAge()
 {
-	return current_age;
-}
-
-void Deck::prepareAge(const CardAgeType age)
-{
-	current_age = age;
 	number_of_cards_taken = 0;
 
 	visible_cards.resize(0);

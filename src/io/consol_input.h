@@ -8,7 +8,7 @@
 
 class ConsolInput {
 public:
-	static PlayerType readPlayerOption(const PlayerID player_id);
-	static std::string readPlayerName(const PlayerID player_id);
-	static uint32_t readCardID();
+	static PlayerType ReadPlayerOption(const PlayerID player_id);
+	static std::string ReadPlayerName(const PlayerID player_id);
+	static uint32_t ReadCardID();
 };

@@ -14,7 +14,7 @@ uint32_t ConsolPlayer::play(const std::vector<Card*>& visible_cards)
 {
 	while (true) {
 		std::cout << name;
-		int card_id = ConsolInput::readCardID();
+		int card_id = ConsolInput::ReadCardID();
 		card_id--; // Display adds +1
 
 		for (uint32_t idx = 0; idx < visible_cards.size(); idx++) {

@@ -3,29 +3,26 @@
 #include <vector>
 
 #include "card.h"
-#include "../display/deck_displayer.h"
 #include "../management/card_manager.h"
 #include "../management/order_manager.h"
 
 
 class Deck {
 public:
-	Deck(const OrderManager& manager);
+	Deck(const OrderManager& order_manager);
 
 	void prepareTheFirstAge();
 	void prepareTheSecondAge();
 	void prepareTheThirdAge();
 
-	void displayDeck();
-
+	const std::vector<Card*>& getCurrentDeck() const;
 	const std::vector<Card*>& getVisibleCards() const;
 	void takeCard(const uint32_t visible_card_idx);
-	
+
 	bool isAgeOn() const;
-	CardAgeType getCurrentAge() const;
 
 private:
-	void prepareAge(const CardAgeType age);
+	void prepareAge();
 
 	std::vector<Card*> arrangeCardPyramid(
 		const std::vector<Card*>& init_previous_row,
@@ -46,13 +43,11 @@ private:
 
 	void makeParentVisible(Card* parent);
 
-	CardAgeType current_age;
-	uint32_t number_of_cards_taken;
-
-	const OrderManager& order_manager;
 	CardManager card_manager;
-	DeckDisplayer deck_displayer;
 
+	// First row is the first row to take cards from
+	// Last row is the last row to take cards from
+	uint32_t number_of_cards_taken;
 	std::vector<Card*> visible_cards;
 	std::vector<Card*> first_row_cards;
 	std::vector<Card*> last_row_cards;
