@@ -16,10 +16,12 @@ protected:
 
 public:
 	PlayerID ID;
+	std::string name;
+
 	virtual uint32_t play(const std::vector<Card*>& visible_cards) = 0;
 
+	bool hasChainSymbol(const ChainSymbol symbol) const;
 protected:
-	std::string name;
 	uint32_t victory_points;
 
 	// These can be removed by wonders

@@ -9,3 +9,13 @@ Player::Player(const PlayerID player_id, const std::string player_name) :
 	victory_points(0),
 	number_of_cards_per_color(NUMBER_OF_CARD_COLORS, 0)
 {}
+
+bool Player::hasChainSymbol(const ChainSymbol symbol) const
+{
+	for (uint32_t idx = 0; idx < chain_symbols.size(); idx++) {
+		if (symbol == chain_symbols[idx]) {
+			return true;
+		}
+	}
+	return false;
+}

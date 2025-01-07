@@ -18,13 +18,15 @@ public:
     void handleTurn();
 
 private:
-    void handleCard(std::unique_ptr<Player>& player, const uint32_t card_id);
+    void initializePlayer(const PlayerID player_id);
+    void playerSwap();
+    void playerTakesCard(std::unique_ptr<Player>& player);
+    void handleCard(std::unique_ptr<Player>& player, const Card* card);
 
     Game& game;
 
-    std::unique_ptr<Player> Simon;
-    std::unique_ptr<Player> Eniko;
-
     PlayerID current_player;
     PlayerID next_player;
+
+    std::vector<std::unique_ptr<Player>> players;
 };
