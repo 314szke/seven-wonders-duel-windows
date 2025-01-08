@@ -97,7 +97,8 @@ void GameManager::playerTakesCard(std::unique_ptr<Player>& player)
 		card_id = player->play(cards);
 
 		if (! player->hasChainSymbol(cards[card_id]->cost.symbol)) {
-			price = game.market.getMaterialBundlePrice(player->ID, cards[card_id]->cost.materials);
+			price = cards[card_id]->cost.money;
+			price += game.market.getMaterialBundlePrice(player->ID, cards[card_id]->cost.materials);
 			
 			if (! game.bank.creditCheck(player->ID, price)) {
 				std::cout << "WARNING: " << player->name << " can NOT pay for card " << card_id << "!" << std::endl;
@@ -116,5 +117,6 @@ void GameManager::handleCard(std::unique_ptr<Player>& player, const Card* card)
 	switch (card->info.color) {
 		case BROWN: game.market.productionChange(player->ID, card->gain.materials); break;
 		case GREY: game.market.productionDeal(player->ID, card->gain.materials); break;
+		case YELLOW: game.bank.increaseExchangeRateFor(player->ID); break;
 	}
 }

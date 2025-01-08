@@ -13,6 +13,8 @@ public:
     GameTable(const OrderManager& order_manager);
 
     void attack(const PlayerID attacker_id, const PlayerID defender_id, Bank& bank, uint32_t severity);
+
+    uint32_t getMilitaryPoints(const PlayerID player_id) const;
     bool isMilitarySuperior(const PlayerID player_id) const;
     bool isMilitaryWinner(const PlayerID player_id) const;
 

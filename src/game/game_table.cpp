@@ -45,6 +45,11 @@ void GameTable::attack(const PlayerID attacker_id, const PlayerID defender_id, B
     }
 }
 
+uint32_t GameTable::getMilitaryPoints(const PlayerID player_id) const
+{
+    return military_points[player_id];
+}
+
 bool GameTable::isMilitarySuperior(const PlayerID player_id) const
 {
     if (military_points[player_id] == 0) {

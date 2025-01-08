@@ -21,6 +21,11 @@ public:
 	virtual uint32_t play(const std::vector<Card*>& visible_cards) = 0;
 
 	bool hasChainSymbol(const ChainSymbol symbol) const;
+
+	const std::vector<ChainSymbol>& getChainSymbols() const;
+	const std::vector<ScienceSymbol>& getScienceSymbols() const;
+	uint32_t getVictoryPoints() const;
+
 protected:
 	uint32_t victory_points;
 
@@ -28,7 +33,6 @@ protected:
 	std::vector<MaterialBundle> brown_cards;
 	std::vector<MaterialBundle> grey_cards;
 
-	std::vector<uint32_t> number_of_cards_per_color;
 	std::vector<ChainSymbol> chain_symbols;
 	std::vector<ScienceSymbol> science_symbols;
 };

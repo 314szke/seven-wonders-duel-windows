@@ -36,6 +36,17 @@ void Market::productionDeal(const PlayerID player_id, const MaterialBundle& bund
     productionDeal(glass, player_id, bundle.glass);
 }
 
+uint32_t Market::getProducedAmount(const PlayerID player_id, const MaterialType type) const
+{
+    switch (type) {
+        case WOOD: return wood.produce[player_id];
+        case CLAY: return clay.produce[player_id];
+        case ROCK: return rock.produce[player_id];
+        case PAPER: return paper.produce[player_id];
+        case GLASS: return glass.produce[player_id];
+    }
+}
+
 MaterialBundle Market::extractMissingMaterials(const PlayerID player_id, const MaterialBundle& bundle) const
 {
     MaterialBundle remaining_materials = bundle;

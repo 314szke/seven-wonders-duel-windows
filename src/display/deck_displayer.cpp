@@ -10,12 +10,13 @@ constexpr auto NUMBER_OF_SEPERATING_SPACES = 4;
 constexpr auto SEPERATING_SPACES = "    ";
 constexpr auto MAX_ROW_LENGTH = 32; // 6 cards (each card two digit) + SEPARATING_SPACES
 
-constexpr auto HIDDEN_STRING = "00";
+constexpr auto HIDDEN_STRING = "??";
 constexpr auto TAKEN_STRING = "XX";
 
 
 void DeckDisplayer::Show(const CardAgeType card_age, const std::vector<Card*>& last_row_in_deck)
 {
+	std::cout << std::endl;
 	switch (card_age) {
 		case FIRST_AGE: showFirstAge(last_row_in_deck); break;
 		case SECOND_AGE: showSecondAge(last_row_in_deck); break;
@@ -128,10 +129,10 @@ void DeckDisplayer::printRow(const std::vector<Card*>& row)
 void DeckDisplayer::printCard(const Card* card)
 {
 	if ((card->state == CARD_VISIBLE) || (card->state == CARD_VISIBLE_UNAVAILABLE)) {
-		if ((card->info.ID + 1) < 10) {
+		if (card->info.ID < 10) {
 			std::cout << "0";
 		}
-		std::cout << (card->info.ID + 1) << SEPERATING_SPACES;
+		std::cout << card->info.ID << SEPERATING_SPACES;
 	}
 	else if (card->state == CARD_HIDDEN) {
 		std::cout << HIDDEN_STRING << SEPERATING_SPACES;

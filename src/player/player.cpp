@@ -6,8 +6,7 @@
 Player::Player(const PlayerID player_id, const std::string player_name) :
 	ID(player_id),
 	name(player_name),
-	victory_points(0),
-	number_of_cards_per_color(NUMBER_OF_CARD_COLORS, 0)
+	victory_points(0)
 {}
 
 bool Player::hasChainSymbol(const ChainSymbol symbol) const
@@ -18,4 +17,19 @@ bool Player::hasChainSymbol(const ChainSymbol symbol) const
 		}
 	}
 	return false;
+}
+
+const std::vector<ChainSymbol>& Player::getChainSymbols() const
+{
+	return chain_symbols;
+}
+
+const std::vector<ScienceSymbol>& Player::getScienceSymbols() const
+{
+	return science_symbols;
+}
+
+uint32_t Player::getVictoryPoints() const
+{
+	return victory_points;
 }

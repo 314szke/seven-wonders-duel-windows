@@ -13,6 +13,7 @@ public:
 
     void productionChange(const PlayerID player_id, const MaterialBundle& bundle);
     void productionDeal(const PlayerID player_id, const MaterialBundle& bundle);
+    uint32_t getProducedAmount(const PlayerID player_id, const MaterialType type) const;
 
 private:
     MaterialBundle extractMissingMaterials(const PlayerID player_id, const MaterialBundle& bundle) const;
