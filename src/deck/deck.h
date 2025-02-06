@@ -17,7 +17,7 @@ public:
 
 	const std::vector<Card*>& getCurrentDeck() const;
 	const std::vector<Card*>& getVisibleCards() const;
-	void takeCard(const uint32_t visible_card_idx);
+	void takeCard(Card* card);
 
 	bool isAgeOn() const;
 

@@ -10,24 +10,19 @@
 #include "../player/robot_player.h"
 
 
-GameManager::GameManager(Game& game_ref) :
+GameManager::GameManager(Game& game_ref, const OrderManager& order_manager) :
 	game(game_ref),
-	current_player(SIMON),
-	next_player(ENIKO),
 	players(2)
-{}
-
-void GameManager::initializePlayers()
 {
-	initializePlayer(SIMON);
-	initializePlayer(ENIKO);
+	current_player = order_manager.getInitialPlayerOrder()[0];
+	next_player = order_manager.getInitialPlayerOrder()[1];
 }
 
 void GameManager::initalizeGame()
 {
+	initializePlayer(SIMON);
+	initializePlayer(ENIKO);
 	game.deck.prepareTheFirstAge();
-	current_player = SIMON;
-	next_player = ENIKO;
 }
 
 bool GameManager::gameIsOn() const
@@ -39,7 +34,6 @@ bool GameManager::gameIsOn() const
 	switch (game.age) {
 		case FIRST_AGE: game.deck.prepareTheSecondAge(); game.age = SECOND_AGE; break;
 		case SECOND_AGE: game.deck.prepareTheThirdAge(); game.age = THIRD_AGE; break;
-		case THIRD_AGE: return false;
 	}
 
 	return false;
@@ -55,11 +49,7 @@ void GameManager::showTable() const
 void GameManager::handleTurn()
 {
 	showTable();
-	playerTakesCard(players[current_player]);
-	playerSwap();
-
-	showTable();
-	playerTakesCard(players[current_player]);
+	playerAction(players[current_player]);
 	playerSwap();
 }
 
@@ -86,37 +76,49 @@ void GameManager::playerSwap()
 	next_player = id;
 }
 
-void GameManager::playerTakesCard(std::unique_ptr<Player>& player)
+void GameManager::playerAction(std::unique_ptr<Player>& player)
 {
-	const std::vector<Card*>& cards = game.deck.getVisibleCards();
+	PlayerAction action = player->play(game);
+	game.deck.takeCard(action.card);
 
-	int card_id = -1;
-	uint32_t price = 0;
-	
-	while (card_id == -1) {
-		card_id = player->play(cards);
-
-		if (! player->hasChainSymbol(cards[card_id]->cost.symbol)) {
-			price = cards[card_id]->cost.money;
-			price += game.market.getPurchasePrice(player->ID, cards[card_id]->cost.materials);
-			
-			if (! game.bank.creditCheck(player->ID, price)) {
-				std::cout << "WARNING: " << player->name << " can NOT pay for card " << card_id << "!" << std::endl;
-				card_id = -1;
-			}
-		}
+	if (action.action_type == TAKE) {
+		game.bank.collectFrom(player->ID, game.getPriceFor(*player, action.card));
+		handleCard(player, action.card);
+	} else if (action.action_type == DISCARD) {
+		game.bank.exchangeCard(player->ID);
+	} else {
+		// TODO: build a wonder
 	}
-	
-	game.deck.takeCard(card_id);
-	game.bank.collectFrom(player->ID, price);
-	handleCard(player, cards[card_id]);
 }
 
 void GameManager::handleCard(std::unique_ptr<Player>& player, const Card* card)
 {
-	switch (card->info.color) {
-		case BROWN: game.market.productionChange(player->ID, card->gain.materials); break;
-		case GREY: game.market.productionDeal(player->ID, card->gain.materials); break;
-		case YELLOW: game.bank.increaseExchangeRateFor(player->ID); break;
+	if (card->info.color == BROWN) {
+		player->brown_cards.push_back(card);
+	} else if (card->info.color == GREY) {
+		player->grey_cards.push_back(card);
+	} else if (card->info.color == YELLOW) {
+		game.bank.increaseExchangeRateFor(player->ID);
+	}
+	
+	game.bank.payTo(player->ID, card->gain.money);
+	player->victory_points += card->gain.victory_point;
+	if (card->gain.military_point > 0) {
+		game.table.attack(current_player, next_player, game.bank, card->gain.military_point);
+	}
+
+	if (card->gain.chain_symbol != NO_CHAIN) {
+		player->chain_symbols.push_back(card->gain.chain_symbol);
+	}	
+	if (card->gain.science_symbol != NO_SCIENCE) {
+		player->science_symbols.push_back(card->gain.science_symbol);
+	}
+
+	if (card->gain.production_deal) {
+		game.market.productionDeal(player->ID, card->gain.materials);
+	} else if (card->gain.hybrid_production) {
+		game.market.hybridProduction(player->ID, card->gain.materials);
+	} else {
+		game.market.productionChange(player->ID, card->gain.materials);
 	}
 }

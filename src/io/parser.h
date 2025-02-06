@@ -15,7 +15,10 @@ protected:
     void readLine();
 
     template<typename T>
-    T parseNumber(const std::ssub_match& match) {
+    T parseNumber(const std::ssub_match& match, T default_value) {
+        if (match.str() == "-") {
+            return default_value;
+        }
         T variable;
         std::stringstream ss;
         ss << match.str();

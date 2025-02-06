@@ -8,7 +8,7 @@
 
 static const std::regex PLAYER_TYPE_REGEX("[0-9]");
 static const std::regex PLAYER_NAME_REGEX("[A-Za-z]+");
-static const std::regex CARD_ID_REGEX("[0-9][0-9]?");
+static const std::regex PLAYER_ACTION_REGEX("(t|d|b|(?:take)|(?:discard)|(?:build))\\s+([0-9][0-9])");
 
 
 PlayerType ConsolInput::ReadPlayerOption(const PlayerID player_id)
@@ -36,7 +36,7 @@ PlayerType ConsolInput::ReadPlayerOption(const PlayerID player_id)
 			case CONSOL_PLAYER: return CONSOL_PLAYER;
 			case ROBOT_PLAYER: return ROBOT_PLAYER;
 			default: {
-				std::cout << "WARNING: invalid option << " << player_option << " >> !" << std::endl << std::endl;
+				std::cout << "WARNING: invalid option " << player_option << " !" << std::endl << std::endl;
 				player_option = -1;
 			}
 		}
@@ -66,20 +66,30 @@ std::string ConsolInput::ReadPlayerName(const PlayerID player_id)
 	throw CONSOL_NO_PLAYER_NAME;
 }
 
-uint32_t ConsolInput::ReadCardID()
+PlayerAction ConsolInput::ReadPlayerAction()
 {
+	PlayerAction player_action;
 	std::string line;
 	std::smatch regex_match;
 
 	while (true) {
-		std::cout << ", pick a card! >> ";
-		
+		std::cout << ">> ";
 		std::getline(std::cin, line);
-		if (std::regex_match(line, regex_match, CARD_ID_REGEX)) {
-			return stoi(regex_match[0].str());
+
+		if (std::regex_match(line, regex_match, PLAYER_ACTION_REGEX)) {
+			if (regex_match[1].str() == "t" || regex_match[1].str() == "take") {
+				player_action.action_type = TAKE;
+			} else if (regex_match[1].str() == "d" || regex_match[1].str() == "discard") {
+				player_action.action_type = DISCARD;
+			} else if (regex_match[1].str() == "b" || regex_match[1].str() == "build") {
+				player_action.action_type = BUILD;
+			}
+			player_action.card_id = stoi(regex_match[2].str());
+			return player_action;
 		}
 		else {
-			std::cout << "WARNING: your input must only contain a CARD ID!" << std::endl << std::endl;
+			std::cout << "WARNING: invalid input! Valid inputs: <action_type> <card_id>." << std::endl;
+			std::cout << "Action types: t or take, d or discard, b or build." << std::endl << std::endl;
 		}
 	}
 }

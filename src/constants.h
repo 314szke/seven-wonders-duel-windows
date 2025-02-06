@@ -11,7 +11,7 @@ constexpr auto NUMBER_OF_GUILD_CARDS = 7;
 
 constexpr auto INITIAL_BANK_FUNDS = 72;
 constexpr auto PLAYER_START_FUND = 7;
-constexpr auto INITIAL_CARD_EXCHANGE_RATE = 7;
+constexpr auto INITIAL_CARD_EXCHANGE_RATE = 1;
 
 constexpr auto NUMBER_OF_PROGRESS_COINS = 10;
 constexpr auto NUMBER_OF_VISIBLE_COINS = 5;

@@ -150,6 +150,7 @@
     <ClCompile Include="src\management\order_manager.cpp" />
     <ClCompile Include="src\player\consol_player.cpp" />
     <ClCompile Include="src\player\player.cpp" />
+    <ClCompile Include="src\player\player_action.cpp" />
     <ClCompile Include="src\player\robot_player.cpp" />
     <ClCompile Include="src\seven-wonders-duel-windows.cpp" />
   </ItemGroup>
@@ -191,6 +192,7 @@
     <ClInclude Include="src\management\order_manager.h" />
     <ClInclude Include="src\player\consol_player.h" />
     <ClInclude Include="src\player\player.h" />
+    <ClInclude Include="src\player\player_action.h" />
     <ClInclude Include="src\player\robot_player.h" />
   </ItemGroup>
   <ItemGroup>

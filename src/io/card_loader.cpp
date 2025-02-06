@@ -51,28 +51,28 @@ void CardLoader::parseCardDetails(const uint32_t card_id, const std::smatch& mat
 {
 	CardInfo info(
 		card_id,
-		parseNumber<uint32_t>(match[AGE]),
-		parseNumber<uint32_t>(match[COLOR]));
+		parseNumber<uint32_t>(match[AGE], NO_AGE),
+		parseNumber<uint32_t>(match[COLOR], NUMBER_OF_CARD_COLORS));
 
 	CardCost cost(
-		parseNumber<uint32_t>(match[COST_MONEY]),
+		parseNumber<uint32_t>(match[COST_MONEY], 0),
 		parseMaterialBundle(match[COST_MATERIALS]),
-		parseNumber<int>(match[COST_SYMBOL]));
+		parseNumber<int>(match[COST_SYMBOL], NO_CHAIN));
 
 	CardGain gain(
-		parseNumber<uint32_t>(match[GAIN_MONEY]),
-		parseNumber<uint32_t>(match[GAIN_VICTORY_POINT]),
-		parseNumber<uint32_t>(match[GAIN_MILITARY_POINT]),
+		parseNumber<uint32_t>(match[GAIN_MONEY], 0),
+		parseNumber<uint32_t>(match[GAIN_VICTORY_POINT], 0),
+		parseNumber<uint32_t>(match[GAIN_MILITARY_POINT], 0),
 //
-		parseNumber<int>(match[GAIN_CHAIN_SYMBOL]),
-		parseNumber<int>(match[GAIN_SCIENCE_SYMBOL]),
+		parseNumber<int>(match[GAIN_CHAIN_SYMBOL], NO_CHAIN),
+		parseNumber<int>(match[GAIN_SCIENCE_SYMBOL], NO_SCIENCE),
 //
-		parseNumber<bool>(match[GAIN_PRODUCTION_DEAL]),
-		parseNumber<bool>(match[GAIN_BOUNDED_MATERIAL]),
+		parseNumber<bool>(match[GAIN_PRODUCTION_DEAL], false),
+		parseNumber<bool>(match[GAIN_HYBRID_MATERIAL], false),
 		parseMaterialBundle(match[GAIN_MATERIALS]),
 //
-		parseNumber<int>(match[GAIN_ACTION]),
-		parseNumber<int>(match[GAIN_GUILD_ACTION]));
+		parseNumber<int>(match[GAIN_ACTION], NO_ACTION),
+		parseNumber<int>(match[GAIN_GUILD_ACTION], NO_GUILD_ACTION));
 
 	cards.push_back(Card(info, cost, gain));
 }

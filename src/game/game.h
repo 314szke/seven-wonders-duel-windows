@@ -6,11 +6,15 @@
 #include "../finance/market.h"
 #include "../management/order_manager.h"
 #include "../game/game_table.h"
+#include "../player/player.h"
 
 
 class Game {
 public: 
 	Game(const OrderManager& order_manager);
+
+	bool canPayFor(const Player& player, const Card* card) const;
+	uint32_t getPriceFor(const Player& player, const Card* card) const;
 
 	CardAgeType age;
 	Bank bank;

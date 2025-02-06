@@ -18,18 +18,3 @@ bool Player::hasChainSymbol(const ChainSymbol symbol) const
 	}
 	return false;
 }
-
-const std::vector<ChainSymbol>& Player::getChainSymbols() const
-{
-	return chain_symbols;
-}
-
-const std::vector<ScienceSymbol>& Player::getScienceSymbols() const
-{
-	return science_symbols;
-}
-
-uint32_t Player::getVictoryPoints() const
-{
-	return victory_points;
-}

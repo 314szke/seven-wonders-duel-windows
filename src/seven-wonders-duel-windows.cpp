@@ -11,9 +11,8 @@ int main()
 {
 	OrderManager order_manger;
 	Game game(order_manger);
-	GameManager manager(game);
+	GameManager manager(game, order_manger);
 
-	manager.initializePlayers();
 	manager.initalizeGame();
 
 	while (manager.gameIsOn()) {

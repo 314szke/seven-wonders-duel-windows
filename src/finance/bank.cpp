@@ -25,6 +25,15 @@ void Bank::collectFrom(const PlayerID player_id, const uint32_t value) {
     player_money[player_id] -= value;
 }
 
+void Bank::payTo(const PlayerID player_id, const uint32_t value) {
+    if (value > fund) {
+        throw BANK_OUT_OF_FUNDS;
+    }
+
+    fund -= value;
+    player_money[player_id] += value;
+}
+
 void Bank::exchangeCard(const PlayerID player_id)
 {
     payTo(player_id, card_exchange_rate[player_id]);
@@ -60,11 +69,8 @@ uint32_t Bank::creditInfo(const PlayerID player_id) const
     return player_money[player_id];
 }
 
-void Bank::payTo(const PlayerID player_id, const uint32_t value) {
-    if (value > fund) {
-        throw BANK_OUT_OF_FUNDS;
-    }
-
-    fund -= value;
-    player_money[player_id] += value;
+uint32_t Bank::getCardExchangeRate(const PlayerID player_id) const
+{
+    return card_exchange_rate[player_id];
 }
+

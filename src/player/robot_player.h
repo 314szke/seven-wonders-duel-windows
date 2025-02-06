@@ -1,13 +1,18 @@
 #pragma once
 
-#include "player.h"
+#include <random>
 
 #include "../deck/card.h"
+#include "../player/player.h"
 
 
 class RobotPlayer : public Player {
 public:
 	RobotPlayer(const PlayerID player_id, const std::string player_name);
 
-	uint32_t play(const std::vector<Card*>& visible_cards) override;
+	PlayerAction play(const Game& game) override;
+
+private:
+	std::random_device rd;
+	std::mt19937 engine;
 };

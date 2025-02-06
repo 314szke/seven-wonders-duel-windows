@@ -8,9 +8,8 @@
 
 class GameManager {
 public:
-    GameManager(Game& game_ref);
+    GameManager(Game& game_ref, const OrderManager& order_manager);
     
-    void initializePlayers();
     void initalizeGame();
 
     bool gameIsOn() const;
@@ -20,7 +19,7 @@ public:
 private:
     void initializePlayer(const PlayerID player_id);
     void playerSwap();
-    void playerTakesCard(std::unique_ptr<Player>& player);
+    void playerAction(std::unique_ptr<Player>& player);
     void handleCard(std::unique_ptr<Player>& player, const Card* card);
 
     Game& game;

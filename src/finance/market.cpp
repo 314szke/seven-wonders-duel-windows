@@ -46,9 +46,9 @@ void Market::productionDeal(const PlayerID player_id, const MaterialBundle& bund
     }
 }
 
-uint32_t Market::getProducedAmount(const PlayerID player_id, const MaterialType type) const
+void Market::hybridProduction(const PlayerID player_id, const MaterialBundle& bundle)
 {
-    return produce[player_id].materials[type];
+    hybrid_produce[player_id].push_back(bundle);
 }
 
 MaterialBundle Market::getBestHybridProduce(const PlayerID player_id, const MaterialBundle& bundle) const

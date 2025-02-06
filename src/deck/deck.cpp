@@ -57,21 +57,17 @@ const std::vector<Card*>& Deck::getVisibleCards() const
 	return visible_cards;
 }
 
-void Deck::takeCard(const uint32_t visible_card_idx)
+void Deck::takeCard(Card* card)
 {
-	if (visible_card_idx > visible_cards.size()) {
-		throw CARD_INDEX_OUT_OF_BOUND;
-	}
-
-	if (visible_cards[visible_card_idx]->state != CARD_VISIBLE) {
+	if (card->state != CARD_VISIBLE) {
 		throw CARD_INVALID_STATE;
 	}
 
-	visible_cards[visible_card_idx]->state = CARD_TAKEN;
+	card->state = CARD_TAKEN;
 	number_of_cards_taken++;
 
-	makeParentVisible(visible_cards[visible_card_idx]->parent_left);
-	makeParentVisible(visible_cards[visible_card_idx]->parent_right);
+	makeParentVisible(card->parent_left);
+	makeParentVisible(card->parent_right);
 }
 
 bool Deck::isAgeOn() const

@@ -36,6 +36,11 @@ const std::vector<uint32_t>& OrderManager::getCardIDs(const CardAgeType age) con
 	}
 }
 
+const std::vector<PlayerID>& OrderManager::getInitialPlayerOrder() const
+{
+	return initial_player_order;
+}
+
 void OrderManager::randomlySelect(
 	std::vector<uint32_t>& container,
 	const uint32_t start_id, 
@@ -76,4 +81,7 @@ void OrderManager::randomInitialization()
 	
 	// Shuffle the guild cards into the third deck
 	std::shuffle(third_card_IDs.begin(), third_card_IDs.end(), engine);
+
+	initial_player_order = { SIMON, ENIKO };
+	std::shuffle(initial_player_order.begin(), initial_player_order.end(), engine);
 }

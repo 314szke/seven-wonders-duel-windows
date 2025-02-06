@@ -8,6 +8,9 @@
 #include "../enums/player_id.h"
 
 
+class PlayerDisplayer;
+
+
 class Market {
 public:
     Market();
@@ -16,8 +19,10 @@ public:
 
     void productionChange(const PlayerID player_id, const MaterialBundle& bundle);
     void productionDeal(const PlayerID player_id, const MaterialBundle& bundle);
-    uint32_t getProducedAmount(const PlayerID player_id, const MaterialType type) const;
+    void hybridProduction(const PlayerID player_id, const MaterialBundle& bundle);
 
+    friend class PlayerDisplayer;
+    
 private:
     MaterialBundle getBestHybridProduce(const PlayerID player_id, const MaterialBundle& bundle) const;
     bool getNextPermutation(const PlayerID player_id, std::vector<uint32_t>& material_per_hybrid_produce) const;

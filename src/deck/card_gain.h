@@ -18,7 +18,7 @@ public:
         const int card_science_symbol,
 //
         const bool card_production_deal,
-        const bool card_bounded_materials,
+        const bool card_hybrid_production,
         const MaterialBundle& card_materials,
 //
         const int card_action,
@@ -32,7 +32,7 @@ public:
     ScienceSymbol science_symbol;
 
     bool production_deal;
-    bool bounded_material;
+    bool hybrid_production;
     MaterialBundle materials;
 
     PlayerDependentAction action;

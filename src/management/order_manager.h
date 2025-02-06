@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "../enums/card_age_types.h"
+#include "../enums/player_id.h"
 
 
 class OrderManager {
@@ -13,6 +14,8 @@ public:
 
 	const std::vector<uint32_t>& getVisibleCoinIDs() const;
 	const std::vector<uint32_t>& getCardIDs(const CardAgeType age) const;
+	const std::vector<PlayerID>& getInitialPlayerOrder() const;
+
 private:
 	void randomlySelect(
 		std::vector<uint32_t>& container,
@@ -26,7 +29,9 @@ private:
 	std::random_device rd;
 	std::mt19937 engine;
 	
+	std::vector<PlayerID> initial_player_order;
 	std::vector<uint32_t> visible_coin_IDs;
+
 	std::vector<uint32_t> first_card_IDs;
 	std::vector<uint32_t> second_card_IDs;
 	std::vector<uint32_t> third_card_IDs;

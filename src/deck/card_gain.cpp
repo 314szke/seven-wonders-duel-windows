@@ -10,7 +10,7 @@ CardGain::CardGain(
 	const int card_science_symbol, 
 //
 	const bool card_production_deal, 
-	const bool card_bounded_materials, 
+	const bool card_hybrid_production,
 	const MaterialBundle& card_materials, 
 //	
     const int card_action, 
@@ -21,7 +21,7 @@ CardGain::CardGain(
 	military_point(card_military_point),
 //
     production_deal(card_production_deal),
-    bounded_material(card_bounded_materials),
+    hybrid_production(card_hybrid_production),
     materials(card_materials)
 {
     switch (card_chain_symbol) {
