@@ -12,15 +12,18 @@ class Market {
 public:
     Market();
 
-    uint32_t getMaterialBundlePrice(const PlayerID player_id, const MaterialBundle& bundle) const;
+    uint32_t getPurchasePrice(const PlayerID player_id, const MaterialBundle& bundle) const;
 
     void productionChange(const PlayerID player_id, const MaterialBundle& bundle);
     void productionDeal(const PlayerID player_id, const MaterialBundle& bundle);
     uint32_t getProducedAmount(const PlayerID player_id, const MaterialType type) const;
 
 private:
-    MaterialBundle extractMissingMaterials(const PlayerID player_id, const MaterialBundle& bundle) const;
-    MaterialBundle getBestHybridProduce(const PlayerID player_id, const MaterialBundle& bundle);
+    MaterialBundle getBestHybridProduce(const PlayerID player_id, const MaterialBundle& bundle) const;
+    bool getNextPermutation(const PlayerID player_id, std::vector<uint32_t>& material_per_hybrid_produce) const;
+    bool isValid(const MaterialBundle& produce, const MaterialBundle& requirement) const;
+
+    uint32_t getBundlePrice(const PlayerID player_id, const MaterialBundle& bundle) const;
     void recalculatePriceFor(const PlayerID player_id, const uint32_t material_idx);
 
     std::vector<MaterialBundle> produce;

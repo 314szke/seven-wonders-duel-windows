@@ -1,7 +1,5 @@
 #include "material_bundle.h"
 
-#include "../enums/material_types.h"
-
 
 MaterialBundle::MaterialBundle() :
     materials(NUMBER_OF_MATERIALS, 0)
@@ -16,4 +14,13 @@ void MaterialBundle::add(const int type)
         case PAPER: materials[PAPER] += 1; break;
         case GLASS: materials[GLASS] += 1; break;
     }
+}
+
+uint32_t MaterialBundle::boundedSubtraction(const uint32_t left, const uint32_t right)
+{
+    if (right > left) {
+        return 0;
+    }
+
+    return (left - right);
 }

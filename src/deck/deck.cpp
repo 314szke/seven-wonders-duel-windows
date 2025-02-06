@@ -13,9 +13,7 @@ Deck::Deck(const OrderManager& order_manager) :
 
 void Deck::prepareTheFirstAge()
 {
-	card_manager.reset();
 	prepareAge();
-
 	card_manager.fill(first_row_cards, 6, FIRST_AGE, CARD_VISIBLE);
 	last_row_cards = arrangeCardPyramid(first_row_cards, FIRST_AGE, 5, 2);
 	visible_cards = first_row_cards;
@@ -24,7 +22,6 @@ void Deck::prepareTheFirstAge()
 void Deck::prepareTheSecondAge()
 {
 	prepareAge();
-
 	card_manager.fill(first_row_cards, 2, SECOND_AGE, CARD_VISIBLE);
 	last_row_cards = arrangeCardInversePyramid(first_row_cards, SECOND_AGE, 3, 6);
 	visible_cards = first_row_cards;
@@ -73,11 +70,8 @@ void Deck::takeCard(const uint32_t visible_card_idx)
 	visible_cards[visible_card_idx]->state = CARD_TAKEN;
 	number_of_cards_taken++;
 
-	Card* parent_left = visible_cards[visible_card_idx]->parent_left;
-	Card* parent_right = visible_cards[visible_card_idx]->parent_right;
-
-	makeParentVisible(parent_left);
-	makeParentVisible(parent_right);
+	makeParentVisible(visible_cards[visible_card_idx]->parent_left);
+	makeParentVisible(visible_cards[visible_card_idx]->parent_right);
 }
 
 bool Deck::isAgeOn() const

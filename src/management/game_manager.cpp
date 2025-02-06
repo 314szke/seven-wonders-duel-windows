@@ -98,7 +98,7 @@ void GameManager::playerTakesCard(std::unique_ptr<Player>& player)
 
 		if (! player->hasChainSymbol(cards[card_id]->cost.symbol)) {
 			price = cards[card_id]->cost.money;
-			price += game.market.getMaterialBundlePrice(player->ID, cards[card_id]->cost.materials);
+			price += game.market.getPurchasePrice(player->ID, cards[card_id]->cost.materials);
 			
 			if (! game.bank.creditCheck(player->ID, price)) {
 				std::cout << "WARNING: " << player->name << " can NOT pay for card " << card_id << "!" << std::endl;

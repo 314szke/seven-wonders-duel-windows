@@ -11,8 +11,6 @@ class CardManager {
 public:
 	CardManager(const OrderManager& order_manager);
 
-	void reset();
-
 	void fill(
 		std::vector<Card*>& container,
 		const uint32_t card_number,
