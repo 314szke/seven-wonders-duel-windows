@@ -138,7 +138,6 @@
     <ClCompile Include="src\display\player_displayer.cpp" />
     <ClCompile Include="src\finance\bank.cpp" />
     <ClCompile Include="src\finance\market.cpp" />
-    <ClCompile Include="src\finance\material.cpp" />
     <ClCompile Include="src\finance\material_bundle.cpp" />
     <ClCompile Include="src\game\game.cpp" />
     <ClCompile Include="src\game\game_table.cpp" />
@@ -180,7 +179,6 @@
     <ClInclude Include="src\enums\wonder_actions.h" />
     <ClInclude Include="src\finance\bank.h" />
     <ClInclude Include="src\finance\market.h" />
-    <ClInclude Include="src\finance\material.h" />
     <ClInclude Include="src\finance\material_bundle.h" />
     <ClInclude Include="src\game\game.h" />
     <ClInclude Include="src\game\game_table.h" />

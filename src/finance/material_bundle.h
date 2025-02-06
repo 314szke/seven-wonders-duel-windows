@@ -1,22 +1,14 @@
 #pragma once
 
 #include <stdint.h>
-
-#include "../enums/material_types.h"
+#include <vector>
 
 
 class MaterialBundle {
 public:
     MaterialBundle();
 
-    void add(const int type, const uint32_t amount);
+    void add(const int material_type);
 
-    bool empty;
-
-    uint32_t wood;
-    uint32_t clay;
-    uint32_t rock;
-
-    uint32_t paper;
-    uint32_t glass;
+    std::vector<uint32_t> materials;
 };

@@ -34,7 +34,7 @@ MaterialBundle Parser::parseMaterialBundle(const std::ssub_match& match) const
     std::smatch sub_match;
 
     while (std::regex_search(sub_line, sub_match, MATERIAL_PATTERN)) {
-        bundle.add(stoi(sub_match[1].str()), 1);
+        bundle.add(stoi(sub_match[1].str()));
         sub_line = sub_match.suffix();
     }
 

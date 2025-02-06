@@ -1,23 +1,19 @@
 #include "material_bundle.h"
 
+#include "../enums/material_types.h"
+
 
 MaterialBundle::MaterialBundle() :
-    empty(true),
-    wood(0),
-    clay(0),
-    rock(0),
-    paper(0),
-    glass(0)
+    materials(NUMBER_OF_MATERIALS, 0)
 {}
 
-void MaterialBundle::add(const int type, const uint32_t amount)
+void MaterialBundle::add(const int type)
 {
-    empty = false;
     switch (type) {
-        case WOOD : wood += amount; break;
-        case CLAY : clay += amount; break;
-        case ROCK : rock += amount; break;
-        case PAPER : paper += amount; break;
-        case GLASS : glass += amount; break;
+        case WOOD: materials[WOOD] += 1; break;
+        case CLAY: materials[CLAY] += 1; break;
+        case ROCK: materials[ROCK] += 1; break;
+        case PAPER: materials[PAPER] += 1; break;
+        case GLASS: materials[GLASS] += 1; break;
     }
 }
