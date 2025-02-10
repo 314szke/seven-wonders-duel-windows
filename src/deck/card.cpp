@@ -6,11 +6,5 @@ Card::Card(const CardInfo& card_info, const CardCost& card_cost, const CardGain&
 	cost(card_cost),
 	gain(card_gain),
 //
-	state(CARD_UNUSED),
-//
-	parent_left(NULL),
-	parent_right(NULL),
-//
-	child_left(NULL),
-	child_right(NULL)
+	state(CARD_UNUSED)
 {}

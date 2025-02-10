@@ -13,7 +13,7 @@ RobotPlayer::RobotPlayer(const PlayerID player_id, const std::string player_name
 
 PlayerAction RobotPlayer::play(const Game& game)
 {
-	std::vector<Card*> visible_cards = game.deck.getVisibleCards();
+	const std::vector<std::shared_ptr<Card>>& visible_cards = game.deck.getVisibleCards();
 	std::shuffle(visible_cards.begin(), visible_cards.end(), engine);
 
 	PlayerAction player_action;

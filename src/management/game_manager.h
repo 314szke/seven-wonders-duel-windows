@@ -20,7 +20,7 @@ private:
     void initializePlayer(const PlayerID player_id);
     void playerSwap();
     void playerAction(std::unique_ptr<Player>& player);
-    void handleCard(std::unique_ptr<Player>& player, const Card* card);
+    void handleCard(std::unique_ptr<Player>& player, std::shared_ptr<const Card> card);
 
     Game& game;
 

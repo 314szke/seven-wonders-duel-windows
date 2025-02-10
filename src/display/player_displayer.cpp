@@ -5,9 +5,11 @@
 #include "../enums/material_types.h"
 #include "../enums/chain_symbols.h"
 #include "../enums/science_symbols.h"
+#include "../display/card_displayer.h"
 
 
 constexpr auto PLAYER_INFO_SEPARATOR = " |";
+
 
 void PlayerDisplayer::Show(const std::unique_ptr<Player>& player, const Game& game)
 {
@@ -70,13 +72,7 @@ void PlayerDisplayer::showMaterials(const std::unique_ptr<Player>& player, const
                     std::cout << "/";
                 }
 
-                switch (idx) {
-                    case WOOD: std::cout << "W"; break;
-                    case CLAY: std::cout << "C"; break;
-                    case ROCK: std::cout << "R"; break;
-                    case PAPER: std::cout << "P"; break;
-                    case GLASS: std::cout << "G"; break;
-                }
+                CardDisplayer::PrintMaterial(idx);
             }
         }
     }
@@ -89,43 +85,14 @@ void PlayerDisplayer::showMaterials(const std::unique_ptr<Player>& player, const
 void PlayerDisplayer::showSymbols(const std::unique_ptr<Player>& player)
 {
 	for (ChainSymbol symbol : player->chain_symbols) {
-        switch (symbol) {
-            case VASE: std::cout << " VASE"; break;
-            case SWORD: std::cout << " SWORD"; break;
-            case TOWER: std::cout << " TOWER"; break;
-            case HORSESHOE:std::cout << " HORSESHOE"; break;
-            case BOOK: std::cout << " BOOK"; break;
-            case GEAR: std::cout << " GEAR"; break;
-            case MOON: std::cout << " MOON"; break;
-            case WATER: std::cout << " WATER"; break;
-            case MASK: std::cout << " MASK"; break;
-            case BARREL: std::cout << " BARREL"; break;
-            case TARGET: std::cout << " TARGET"; break;
-            case HELMET: std::cout << " HELMET"; break;
-            case TEAPOT: std::cout << " TEAPOT"; break;
-            case HARP: std::cout << " HARP"; break;
-            case SUN:  std::cout << " SUN"; break;
-            case COLUMN: std::cout << " COLUMN"; break;
-            case BUILDING: std::cout << " BUILDING"; break;
-        }
+        std::cout << " ";
+        CardDisplayer::PrintChainSymbol(symbol);
 	}
-    
-    if (player->chain_symbols.size() > 0) {
-        std::cout << PLAYER_INFO_SEPARATOR;
-    }
+    std::cout << PLAYER_INFO_SEPARATOR;
 
     for (ScienceSymbol symbol : player->science_symbols) {
-        switch (symbol) {
-            case GLOBE: std::cout << " GLOBE"; break;
-            case WHEEL: std::cout << " WHEEL"; break;
-            case WATCH: std::cout << " WATCH"; break;
-            case MORTAR: std::cout << " MORTAR"; break;
-            case RULER: std::cout << " RULER"; break;
-            case PEN: std::cout << " PEN"; break;
-        }
+        std::cout << " ";
+        CardDisplayer::PrintScienceSymbol(symbol);
     }
-
-    if (player->science_symbols.size() > 0) {
-        std::cout << PLAYER_INFO_SEPARATOR;
-    }
+    std::cout << PLAYER_INFO_SEPARATOR;
 }

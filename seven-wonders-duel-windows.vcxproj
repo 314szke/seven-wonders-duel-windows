@@ -134,6 +134,7 @@
     <ClCompile Include="src\deck\card_cost.cpp" />
     <ClCompile Include="src\deck\deck.cpp" />
     <ClCompile Include="src\deck\wonder.cpp" />
+    <ClCompile Include="src\display\card_displayer.cpp" />
     <ClCompile Include="src\display\deck_displayer.cpp" />
     <ClCompile Include="src\display\player_displayer.cpp" />
     <ClCompile Include="src\finance\bank.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="src\deck\card_cost.h" />
     <ClInclude Include="src\deck\deck.h" />
     <ClInclude Include="src\deck\wonder.h" />
+    <ClInclude Include="src\display\card_displayer.h" />
     <ClInclude Include="src\display\deck_displayer.h" />
     <ClInclude Include="src\display\player_displayer.h" />
     <ClInclude Include="src\enums\card_age_types.h" />
@@ -172,6 +174,7 @@
     <ClInclude Include="src\enums\exception_types.h" />
     <ClInclude Include="src\enums\guild_actions.h" />
     <ClInclude Include="src\enums\material_types.h" />
+    <ClInclude Include="src\enums\player_action_type.h" />
     <ClInclude Include="src\enums\player_dependent_actions.h" />
     <ClInclude Include="src\enums\player_id.h" />
     <ClInclude Include="src\enums\player_types.h" />

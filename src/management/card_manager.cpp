@@ -16,7 +16,7 @@ CardManager::CardManager(const OrderManager& order_manager) :
 {}
 
 void CardManager::fill(
-	std::vector<Card*>& container, 
+	std::vector<std::shared_ptr<Card>>& container,
 	const uint32_t card_number, 
 	const CardAgeType card_age, 
 	const CardState card_state)
@@ -29,7 +29,17 @@ void CardManager::fill(
 	}
 }
 
-void CardManager::fill(std::vector<Card*>& container, const uint32_t card_number, const CardState card_state, const std::vector<uint32_t>& card_IDs, uint32_t* idx)
+std::shared_ptr<const Card> CardManager::getCard(const uint32_t card_id) const
+{
+	return card_loader.getCard(card_id);
+}
+
+std::shared_ptr<Card> CardManager::getCard(const uint32_t card_id)
+{
+	return card_loader.getCard(card_id);
+}
+
+void CardManager::fill(std::vector<std::shared_ptr<Card>>& container, const uint32_t card_number, const CardState card_state, const std::vector<uint32_t>& card_IDs, uint32_t* idx)
 {
 	uint32_t end_idx = (*idx + card_number);
 	if (end_idx > NUMBER_OF_CARDS_PER_AGE) {

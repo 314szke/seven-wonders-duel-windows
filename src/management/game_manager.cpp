@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include "../display/card_displayer.h"
 #include "../display/deck_displayer.h"
 #include "../display/player_displayer.h"
 #include "../enums/card_colors.h"
@@ -32,8 +33,8 @@ bool GameManager::gameIsOn() const
 	}
 
 	switch (game.age) {
-		case FIRST_AGE: game.deck.prepareTheSecondAge(); game.age = SECOND_AGE; break;
-		case SECOND_AGE: game.deck.prepareTheThirdAge(); game.age = THIRD_AGE; break;
+		case FIRST_AGE: game.deck.prepareTheSecondAge(); game.age = SECOND_AGE; return true;
+		case SECOND_AGE: game.deck.prepareTheThirdAge(); game.age = THIRD_AGE; return true;
 	}
 
 	return false;
@@ -78,7 +79,14 @@ void GameManager::playerSwap()
 
 void GameManager::playerAction(std::unique_ptr<Player>& player)
 {
-	PlayerAction action = player->play(game);
+	PlayerAction action;
+	while (action.isNotDone()) {
+		action = player->play(game);
+
+		if (action.action_type == INFO) {
+			CardDisplayer::Show(action.card);
+		}
+	}
 	game.deck.takeCard(action.card);
 
 	if (action.action_type == TAKE) {
@@ -91,7 +99,7 @@ void GameManager::playerAction(std::unique_ptr<Player>& player)
 	}
 }
 
-void GameManager::handleCard(std::unique_ptr<Player>& player, const Card* card)
+void GameManager::handleCard(std::unique_ptr<Player>& player, std::shared_ptr<const Card> card)
 {
 	if (card->info.color == BROWN) {
 		player->brown_cards.push_back(card);

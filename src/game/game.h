@@ -13,8 +13,8 @@ class Game {
 public: 
 	Game(const OrderManager& order_manager);
 
-	bool canPayFor(const Player& player, const Card* card) const;
-	uint32_t getPriceFor(const Player& player, const Card* card) const;
+	bool canPayFor(const Player& player, std::shared_ptr<const Card> card) const;
+	uint32_t getPriceFor(const Player& player, std::shared_ptr<const Card> card) const;
 
 	CardAgeType age;
 	Bank bank;

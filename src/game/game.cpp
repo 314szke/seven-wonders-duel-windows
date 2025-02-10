@@ -7,13 +7,13 @@ Game::Game(const OrderManager& order_manager) :
 	table(order_manager)
 {}
 
-bool Game::canPayFor(const Player& player, const Card* card) const
+bool Game::canPayFor(const Player& player, std::shared_ptr<const Card> card) const
 {
 	uint32_t price = getPriceFor(player, card);
 	return bank.creditCheck(player.ID, price);
 }
 
-uint32_t Game::getPriceFor(const Player& player, const Card* card) const
+uint32_t Game::getPriceFor(const Player& player, std::shared_ptr<const Card> card) const
 {
 	if (player.hasChainSymbol(card->cost.symbol)) {
 		return 0;

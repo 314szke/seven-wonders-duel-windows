@@ -33,12 +33,12 @@ void Deck::prepareTheThirdAge()
 
 	// Inverse pyramid section
 	card_manager.fill(first_row_cards, 2, THIRD_AGE, CARD_VISIBLE);
-	std::vector<Card*> previous_row = arrangeCardInversePyramid(first_row_cards, THIRD_AGE, 3, 4);
+	std::vector<std::shared_ptr<Card>> previous_row = arrangeCardInversePyramid(first_row_cards, THIRD_AGE, 3, 4);
 
 	// Middle section
-	std::vector<Card*> middle_row;
+	std::vector<std::shared_ptr<Card>> middle_row;
 	card_manager.fill(middle_row, 2, THIRD_AGE, CARD_HIDDEN);
-	std::vector<Card*> next_row;
+	std::vector<std::shared_ptr<Card>> next_row;
 	card_manager.fill(next_row, 4, THIRD_AGE, CARD_VISIBLE_UNAVAILABLE);
 	arrangeThirdAgeMiddleSection(previous_row, middle_row, next_row);
 
@@ -47,18 +47,25 @@ void Deck::prepareTheThirdAge()
 	visible_cards = first_row_cards;
 }
 
-const std::vector<Card*>& Deck::getCurrentDeck() const
+const std::vector<std::shared_ptr<Card>>& Deck::getCurrentDeck() const
 {
 	return last_row_cards;
 }
 
-const std::vector<Card*>& Deck::getVisibleCards() const
+const std::vector<std::shared_ptr<Card>>& Deck::getVisibleCards() const
 {
 	return visible_cards;
 }
 
-void Deck::takeCard(Card* card)
+std::shared_ptr<const Card> Deck::getCard(const uint32_t card_id) const
 {
+	return card_manager.getCard(card_id);
+}
+
+void Deck::takeCard(std::shared_ptr<const Card> selected_card)
+{
+	std::shared_ptr<Card> card = card_manager.getCard(selected_card->info.ID);
+
 	if (card->state != CARD_VISIBLE) {
 		throw CARD_INVALID_STATE;
 	}
@@ -87,14 +94,14 @@ void Deck::prepareAge()
 	last_row_cards.resize(0);
 }
 
-std::vector<Card*> Deck::arrangeCardPyramid(
-	const std::vector<Card*>& init_previous_row, 
+std::vector<std::shared_ptr<Card>> Deck::arrangeCardPyramid(
+	const std::vector<std::shared_ptr<Card>>& init_previous_row,
 	const CardAgeType card_age, 
 	const uint32_t start, 
 	const uint32_t end)
 {
-	std::vector<Card*> previous_row = init_previous_row;
-	std::vector<Card*> current_row;
+	std::vector<std::shared_ptr<Card>> previous_row = init_previous_row;
+	std::vector<std::shared_ptr<Card>> current_row;
 
 	bool face_up = false;
 
@@ -125,14 +132,14 @@ std::vector<Card*> Deck::arrangeCardPyramid(
 	return current_row;
 }
 
-std::vector<Card*> Deck::arrangeCardInversePyramid(
-	const std::vector<Card*>& init_previous_row, 
+std::vector<std::shared_ptr<Card>> Deck::arrangeCardInversePyramid(
+	const std::vector<std::shared_ptr<Card>>& init_previous_row,
 	const CardAgeType card_age, 
 	const uint32_t start, 
 	const uint32_t end)
 {
-	std::vector<Card*> previous_row = init_previous_row;
-	std::vector<Card*> current_row;
+	std::vector<std::shared_ptr<Card>> previous_row = init_previous_row;
+	std::vector<std::shared_ptr<Card>> current_row;
 
 	bool face_up = false;
 
@@ -164,7 +171,10 @@ std::vector<Card*> Deck::arrangeCardInversePyramid(
 	return current_row;
 }
 
-void Deck::arrangeThirdAgeMiddleSection(std::vector<Card*>& previous_row, std::vector<Card*>& middle_row, std::vector<Card*>& next_row)
+void Deck::arrangeThirdAgeMiddleSection(
+	const std::vector<std::shared_ptr<Card>>& previous_row, 
+	const std::vector<std::shared_ptr<Card>>& middle_row, 
+	const std::vector<std::shared_ptr<Card>>& next_row)
 {
 	// First middle card
 	previous_row[0]->parent_right = middle_row[0];
@@ -193,7 +203,7 @@ void Deck::arrangeThirdAgeMiddleSection(std::vector<Card*>& previous_row, std::v
 	next_row[3]->child_left = middle_row[1];
 }
 
-void Deck::makeParentVisible(Card* parent)
+void Deck::makeParentVisible(std::shared_ptr<Card> parent)
 {
 	if (parent == NULL) {
 		return;

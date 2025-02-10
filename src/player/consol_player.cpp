@@ -14,14 +14,17 @@ ConsolPlayer::ConsolPlayer(const PlayerID player_id, const std::string player_na
 
 PlayerAction ConsolPlayer::play(const Game& game)
 {
-	const std::vector<Card*> visible_cards = game.deck.getVisibleCards();
+	const std::vector<std::shared_ptr<Card>>& visible_cards = game.deck.getVisibleCards();
 
 	while (true) {
 		std::cout << std::endl << name << " ";
 		PlayerAction player_action = ConsolInput::ReadPlayerAction();
 
+		bool id_found = false;
 		for (uint32_t idx = 0; idx < visible_cards.size(); idx++) {
 			if ((visible_cards[idx]->state == CARD_VISIBLE) && (visible_cards[idx]->info.ID == player_action.card_id)) {
+				id_found = true;
+
 				player_action.card = visible_cards[idx];
 				if (player_action.action_type == DISCARD) {
 					return player_action;
@@ -36,6 +39,17 @@ PlayerAction ConsolPlayer::play(const Game& game)
 			}
 		}
 
-		std::cout << "WARNING: invalid card id " << player_action.card_id << " !" << std::endl << std::endl;
+		if (!id_found) {
+			if (player_action.action_type == INFO) {
+				try {
+					player_action.card = game.deck.getCard(player_action.card_id);
+					return player_action;
+				} catch (...) {
+					std::cout << "WARNING: invalid card id " << player_action.card_id << " !" << std::endl << std::endl;
+				}
+			} else {
+				std::cout << "WARNING: invalid card id " << player_action.card_id << " !" << std::endl << std::endl;
+			}
+		}
 	}
 }

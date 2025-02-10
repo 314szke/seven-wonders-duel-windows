@@ -38,13 +38,22 @@ CardLoader::CardLoader()
 	f_in.close();
 }
 
-Card* CardLoader::getCard(const uint32_t card_id)
+std::shared_ptr<const Card> CardLoader::getCard(const uint32_t card_id) const
 {
 	if (card_id > cards.size()) {
 		throw CARD_INDEX_OUT_OF_BOUND;
 	}
 	
-	return &cards[card_id];
+	return std::shared_ptr<const Card>(cards[card_id]);
+}
+
+std::shared_ptr<Card> CardLoader::getCard(const uint32_t card_id)
+{
+	if (card_id > cards.size()) {
+		throw CARD_INDEX_OUT_OF_BOUND;
+	}
+
+	return cards[card_id];
 }
 
 void CardLoader::parseCardDetails(const uint32_t card_id, const std::smatch& match)
@@ -74,5 +83,5 @@ void CardLoader::parseCardDetails(const uint32_t card_id, const std::smatch& mat
 		parseNumber<int>(match[GAIN_ACTION], NO_ACTION),
 		parseNumber<int>(match[GAIN_GUILD_ACTION], NO_GUILD_ACTION));
 
-	cards.push_back(Card(info, cost, gain));
+	cards.push_back(std::shared_ptr<Card>(new Card(info, cost, gain)));
 }

@@ -8,7 +8,7 @@
 
 static const std::regex PLAYER_TYPE_REGEX("[0-9]");
 static const std::regex PLAYER_NAME_REGEX("[A-Za-z]+");
-static const std::regex PLAYER_ACTION_REGEX("(t|d|b|(?:take)|(?:discard)|(?:build))\\s+([0-9][0-9])");
+static const std::regex PLAYER_ACTION_REGEX("(t|d|b|i|(?:take)|(?:discard)|(?:build)|(?:info))\\s+([0-9][0-9]?)");
 
 
 PlayerType ConsolInput::ReadPlayerOption(const PlayerID player_id)
@@ -83,13 +83,15 @@ PlayerAction ConsolInput::ReadPlayerAction()
 				player_action.action_type = DISCARD;
 			} else if (regex_match[1].str() == "b" || regex_match[1].str() == "build") {
 				player_action.action_type = BUILD;
+			} else if (regex_match[1].str() == "i" || regex_match[1].str() == "info") {
+				player_action.action_type = INFO;
 			}
 			player_action.card_id = stoi(regex_match[2].str());
 			return player_action;
 		}
 		else {
 			std::cout << "WARNING: invalid input! Valid inputs: <action_type> <card_id>." << std::endl;
-			std::cout << "Action types: t or take, d or discard, b or build." << std::endl << std::endl;
+			std::cout << "Action types: t or take, d or discard, b or build, i or info." << std::endl << std::endl;
 		}
 	}
 }

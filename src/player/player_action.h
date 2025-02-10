@@ -9,8 +9,10 @@
 class PlayerAction {
 public:
 	PlayerAction();
+	
+	bool isNotDone() const;
 
 	int card_id;
-	Card* card;
+	std::shared_ptr<const Card> card;
 	PlayerActionType action_type;
 };

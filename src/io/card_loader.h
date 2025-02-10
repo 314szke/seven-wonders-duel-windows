@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "parser.h"
 #include "../deck/card.h"
 
@@ -8,11 +10,12 @@ class CardLoader : private Parser {
 public:
 	CardLoader();
 	
-	Card* getCard(const uint32_t card_id);
+	std::shared_ptr<const Card> getCard(const uint32_t card_id) const;
+	std::shared_ptr<Card> getCard(const uint32_t card_id);
 
 private:
 	void parseCardDetails(const uint32_t card_id, const std::smatch& match);
 
-	std::vector<Card> cards;
+	std::vector<std::shared_ptr<Card>> cards;
 };
 

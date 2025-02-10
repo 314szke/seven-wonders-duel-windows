@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "card_info.h"
 #include "card_cost.h"
 #include "card_gain.h"
@@ -16,9 +18,9 @@ public:
 
     CardState state;
 
-    Card* parent_left;
-    Card* parent_right;
+    std::shared_ptr<Card> parent_left;
+    std::shared_ptr<Card> parent_right;
 
-    Card* child_left;
-    Card* child_right;
+    std::shared_ptr<Card> child_left;
+    std::shared_ptr<Card> child_right;
 };

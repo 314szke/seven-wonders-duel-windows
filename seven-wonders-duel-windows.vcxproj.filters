@@ -135,6 +135,9 @@
     <ClCompile Include="src\player\player_action.cpp">
       <Filter>Source Files\player</Filter>
     </ClCompile>
+    <ClCompile Include="src\display\card_displayer.cpp">
+      <Filter>Source Files\display</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\finance\bank.h">
@@ -165,9 +168,6 @@
       <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="src\deck\card.h">
-      <Filter>Header Files\deck</Filter>
-    </ClInclude>
-    <ClInclude Include="src\deck\deck.h">
       <Filter>Header Files\deck</Filter>
     </ClInclude>
     <ClInclude Include="src\deck\wonder.h">
@@ -253,6 +253,15 @@
     </ClInclude>
     <ClInclude Include="src\player\player_action.h">
       <Filter>Header Files\player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\display\card_displayer.h">
+      <Filter>Header Files\display</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enums\player_action_type.h">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deck\deck.h">
+      <Filter>Header Files\deck</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

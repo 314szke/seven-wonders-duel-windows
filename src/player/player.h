@@ -26,8 +26,8 @@ public:
 	uint32_t victory_points;
 
 	// These can be removed by wonders
-	std::vector<const Card*> brown_cards;
-	std::vector<const Card*> grey_cards;
+	std::vector<std::shared_ptr<const Card>> brown_cards;
+	std::vector<std::shared_ptr<const Card>> grey_cards;
 
 	std::vector<ChainSymbol> chain_symbols;
 	std::vector<ScienceSymbol> science_symbols;

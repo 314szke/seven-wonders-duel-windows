@@ -12,14 +12,17 @@ public:
 	CardManager(const OrderManager& order_manager);
 
 	void fill(
-		std::vector<Card*>& container,
+		std::vector<std::shared_ptr<Card>>& container,
 		const uint32_t card_number,
 		const CardAgeType card_age,
 		const CardState card_state);
 
+	std::shared_ptr<const Card> getCard(const uint32_t card_id) const;
+	std::shared_ptr<Card> getCard(const uint32_t card_id);
+
 private:
 	void fill(
-		std::vector<Card*>& container,
+		std::vector<std::shared_ptr<Card>>& container,
 		const uint32_t card_number,
 		const CardState card_state,
 		const std::vector<uint32_t>& card_IDs,
