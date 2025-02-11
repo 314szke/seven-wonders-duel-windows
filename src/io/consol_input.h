@@ -11,5 +11,5 @@ class ConsolInput {
 public:
 	static PlayerType ReadPlayerOption(const PlayerID player_id);
 	static std::string ReadPlayerName(const PlayerID player_id);
-	static PlayerAction ReadPlayerAction();
+	static PlayerAction ReadPlayerAction(const std::string& player_name);
 };

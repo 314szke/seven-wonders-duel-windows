@@ -136,6 +136,7 @@
     <ClCompile Include="src\deck\wonder.cpp" />
     <ClCompile Include="src\display\card_displayer.cpp" />
     <ClCompile Include="src\display\deck_displayer.cpp" />
+    <ClCompile Include="src\display\help_displayer.cpp" />
     <ClCompile Include="src\display\player_displayer.cpp" />
     <ClCompile Include="src\finance\bank.cpp" />
     <ClCompile Include="src\finance\market.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="src\deck\wonder.h" />
     <ClInclude Include="src\display\card_displayer.h" />
     <ClInclude Include="src\display\deck_displayer.h" />
+    <ClInclude Include="src\display\help_displayer.h" />
     <ClInclude Include="src\display\player_displayer.h" />
     <ClInclude Include="src\enums\card_age_types.h" />
     <ClInclude Include="src\enums\card_colors.h" />

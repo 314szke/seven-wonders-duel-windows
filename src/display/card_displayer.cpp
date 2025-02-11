@@ -31,14 +31,29 @@ void CardDisplayer::Show(std::shared_ptr<const Card> card)
 	std::cout << "    gain   ";
     std::cout << "$:" << card->gain.money << ", M:" << card->gain.military_point << ", V:" << card->gain.victory_point;
     std::cout << ", materials:[";
-    for (uint32_t idx = 0; idx < NUMBER_OF_MATERIALS; idx++) {
-        if (card->gain.materials.materials[idx] > 0) {
-            for (uint32_t jdx = 0; jdx < card->gain.materials.materials[idx]; jdx++) {
-                PrintMaterial(idx);
-            }
+    if (card->gain.production_deal) {
+        PrintProductionDeal(card->gain.materials);
+    } else if (card->gain.hybrid_production) {
+        PrintHybridProduction(card->gain.materials);
+    } else {
+        PrintMaterials(card->gain.materials);
+    }
+    
+    std::cout << "], chain_symbol:[";
+    CardDisplayer::PrintChainSymbol(card->gain.chain_symbol);
+    std::cout << "], science_symbol:[";
+    CardDisplayer::PrintScienceSymbol(card->gain.science_symbol);
+    std::cout << "]";
+    std::cout << std::endl;
+}
+
+void CardDisplayer::Show(const std::vector<std::shared_ptr<const Card>>& cards)
+{
+    for (uint32_t idx = 0; idx < cards.size(); idx++) {
+        if (cards[idx]->state == CARD_VISIBLE) {
+            Show(cards[idx]);
         }
     }
-    std::cout << "]";
 }
 
 void CardDisplayer::PrintChainSymbol(const ChainSymbol symbol)
@@ -87,12 +102,50 @@ void CardDisplayer::PrintMaterial(const uint32_t material)
     }
 }
 
+void CardDisplayer::PrintMaterials(const MaterialBundle bundle)
+{
+    for (uint32_t idx = 0; idx < NUMBER_OF_MATERIALS; idx++) {
+        if (bundle.materials[idx] > 0) {
+            for (uint32_t jdx = 0; jdx < bundle.materials[idx]; jdx++) {
+                PrintMaterial(idx);
+            }
+        }
+    }
+}
+
+void CardDisplayer::PrintProductionDeal(const MaterialBundle bundle)
+{
+    for (uint32_t idx = 0; idx < NUMBER_OF_MATERIALS; idx++) {
+        if (bundle.materials[idx] > 0) {
+            std::cout << "(";
+            PrintMaterial(idx);
+            std::cout << ")";
+        }
+    }
+}
+
+void CardDisplayer::PrintHybridProduction(const MaterialBundle bundle)
+{
+    bool first = true;
+    for (uint32_t idx = 0; idx < NUMBER_OF_MATERIALS; idx++) {
+        if (bundle.materials[idx] > 0) {
+            if (first) {
+                first = false;
+            } else {
+                std::cout << "/";
+            }
+            PrintMaterial(idx);
+        }
+    }
+}
+
 void CardDisplayer::PrintColor(const CardColor color)
 {
     switch (color) {
         case BROWN: std::cout << "BROWN"; break;
         case GREY: std::cout << "GREY"; break;
         case YELLOW: std::cout << "YELLOW"; break;
+        case RED: std::cout << "RED"; break;
         case GREEN: std::cout << "GREEN"; break;
         case BLUE: std::cout << "BLUE"; break;
         case PURPLE: std::cout << "PURPLE"; break;

@@ -58,28 +58,12 @@ void PlayerDisplayer::showMaterials(const std::unique_ptr<Player>& player, const
     } else {
         std::cout << "  G :" << game.market.produce[player->ID].materials[GLASS];
     }
-    
     std::cout << PLAYER_INFO_SEPARATOR;
 
     for (const MaterialBundle& bundle : game.market.hybrid_produce[player->ID]) {
-        bool first = true;
-        for (uint32_t idx = 0; idx < NUMBER_OF_MATERIALS; idx++) {
-            if (bundle.materials[idx] > 0) {
-                if (first) {
-                    std::cout << " ";
-                    first = false;
-                } else {
-                    std::cout << "/";
-                }
-
-                CardDisplayer::PrintMaterial(idx);
-            }
-        }
+        CardDisplayer::PrintHybridProduction(bundle);
     }
-
-    if (game.market.hybrid_produce[player->ID].size() > 0) {
-        std::cout << PLAYER_INFO_SEPARATOR;
-    }
+    std::cout << PLAYER_INFO_SEPARATOR;
 }
 
 void PlayerDisplayer::showSymbols(const std::unique_ptr<Player>& player)

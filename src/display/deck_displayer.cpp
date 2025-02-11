@@ -14,7 +14,7 @@ constexpr auto HIDDEN_STRING = "??";
 constexpr auto TAKEN_STRING = "XX";
 
 
-void DeckDisplayer::Show(const CardAgeType card_age, const std::vector<std::shared_ptr<Card>>& last_row_in_deck)
+void DeckDisplayer::Show(const CardAgeType card_age, const std::vector<std::shared_ptr<const Card>>& last_row_in_deck)
 {
 	std::cout << std::endl;
 	switch (card_age) {
@@ -26,21 +26,21 @@ void DeckDisplayer::Show(const CardAgeType card_age, const std::vector<std::shar
 	std::cout << std::endl;
 }
 
-void DeckDisplayer::showFirstAge(const std::vector<std::shared_ptr<Card>>& last_row_in_deck)
+void DeckDisplayer::showFirstAge(const std::vector<std::shared_ptr<const Card>>& last_row_in_deck)
 {
 	printPyramid(last_row_in_deck, NUMBER_OF_ROWS);
 }
 
-void DeckDisplayer::showSecondAge(const std::vector<std::shared_ptr<Card>>& last_row_in_deck)
+void DeckDisplayer::showSecondAge(const std::vector<std::shared_ptr<const Card>>& last_row_in_deck)
 {
 	printInversePyramid(last_row_in_deck, NUMBER_OF_ROWS);
 }
 
-void DeckDisplayer::showThirdAge(const std::vector<std::shared_ptr<Card>>& last_row_in_deck)
+void DeckDisplayer::showThirdAge(const std::vector<std::shared_ptr<const Card>>& last_row_in_deck)
 {
-	std::vector<std::shared_ptr<Card>> previous_row = printPyramid(last_row_in_deck, 3);
-	std::vector<std::shared_ptr<Card>> middle_row = { previous_row[0]->child_right , previous_row[2]->child_right };
-	std::vector<std::shared_ptr<Card>> next_row = {
+	std::vector<std::shared_ptr<const Card>> previous_row = printPyramid(last_row_in_deck, 3);
+	std::vector<std::shared_ptr<const Card>> middle_row = { previous_row[0]->child_right , previous_row[2]->child_right };
+	std::vector<std::shared_ptr<const Card>> next_row = {
 		middle_row[0]->child_left, 
 		middle_row[0]->child_right, 
 		middle_row[1]->child_left, 
@@ -50,15 +50,15 @@ void DeckDisplayer::showThirdAge(const std::vector<std::shared_ptr<Card>>& last_
 	printInversePyramid(next_row, 3);
 }
 
-uint32_t DeckDisplayer::getLength(const std::vector<std::shared_ptr<Card>>& row)
+uint32_t DeckDisplayer::getLength(const std::vector<std::shared_ptr<const Card>>& row)
 {
 	return (uint32_t(row.size()) * 2) + (uint32_t(row.size() - 1) * NUMBER_OF_SEPERATING_SPACES);
 }
 
-std::vector<std::shared_ptr<Card>> DeckDisplayer::printPyramid(const std::vector<std::shared_ptr<Card>>& start_row, const uint32_t number_of_rows)
+std::vector<std::shared_ptr<const Card>> DeckDisplayer::printPyramid(const std::vector<std::shared_ptr<const Card>>& start_row, const uint32_t number_of_rows)
 {
-	std::vector<std::shared_ptr<Card>> previous_row = start_row;
-	std::vector<std::shared_ptr<Card>> current_row;
+	std::vector<std::shared_ptr<const Card>> previous_row = start_row;
+	std::vector<std::shared_ptr<const Card>> current_row;
 
 	for (uint32_t row_counter = 1; row_counter < number_of_rows; row_counter++) {
 		current_row.resize(0);
@@ -75,11 +75,11 @@ std::vector<std::shared_ptr<Card>> DeckDisplayer::printPyramid(const std::vector
 	return previous_row;
 }
 
-std::vector<std::shared_ptr<Card>> DeckDisplayer::printInversePyramid(const std::vector<std::shared_ptr<Card>>& start_row, const uint32_t number_of_rows)
+std::vector<std::shared_ptr<const Card>> DeckDisplayer::printInversePyramid(const std::vector<std::shared_ptr<const Card>>& start_row, const uint32_t number_of_rows)
 {
 	
-	std::vector<std::shared_ptr<Card>> previous_row = start_row;
-	std::vector<std::shared_ptr<Card>> current_row;
+	std::vector<std::shared_ptr<const Card>> previous_row = start_row;
+	std::vector<std::shared_ptr<const Card>> current_row;
 
 	for (uint32_t row_counter = 1; row_counter < number_of_rows; row_counter++) {
 		current_row.resize(0);
@@ -95,7 +95,7 @@ std::vector<std::shared_ptr<Card>> DeckDisplayer::printInversePyramid(const std:
 	return previous_row;
 }
 
-void DeckDisplayer::printThirdAgeMiddleRow(const std::vector<std::shared_ptr<Card>>& row)
+void DeckDisplayer::printThirdAgeMiddleRow(const std::vector<std::shared_ptr<const Card>>& row)
 {
 	// Imitate having a third card in the middle
 	uint32_t extra_middle_space = 2 + (2 * NUMBER_OF_SEPERATING_SPACES);
@@ -116,7 +116,7 @@ void DeckDisplayer::printThirdAgeMiddleRow(const std::vector<std::shared_ptr<Car
 	std::cout << std::endl;
 }
 
-void DeckDisplayer::printRow(const std::vector<std::shared_ptr<Card>>& row)
+void DeckDisplayer::printRow(const std::vector<std::shared_ptr<const Card>>& row)
 {
 	for (uint32_t idx = 0; idx < ((MAX_ROW_LENGTH - getLength(row)) / 2); idx++) {
 		std::cout << " ";
@@ -127,7 +127,7 @@ void DeckDisplayer::printRow(const std::vector<std::shared_ptr<Card>>& row)
 	std::cout << std::endl;
 }
 
-void DeckDisplayer::printCard(std::shared_ptr<Card> card)
+void DeckDisplayer::printCard(std::shared_ptr<const Card> card)
 {
 	if ((card->state == CARD_VISIBLE) || (card->state == CARD_VISIBLE_UNAVAILABLE)) {
 		if (card->info.ID < 10) {

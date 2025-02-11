@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-#include "../display/card_displayer.h"
 #include "../display/deck_displayer.h"
 #include "../display/player_displayer.h"
 #include "../enums/card_colors.h"
@@ -45,6 +44,7 @@ void GameManager::showTable() const
 	DeckDisplayer::Show(game.age, game.deck.getCurrentDeck());
 	PlayerDisplayer::Show(players[SIMON], game);
 	PlayerDisplayer::Show(players[ENIKO], game);
+	std::cout << std::endl;
 }
 
 void GameManager::handleTurn()
@@ -80,11 +80,10 @@ void GameManager::playerSwap()
 void GameManager::playerAction(std::unique_ptr<Player>& player)
 {
 	PlayerAction action;
-	while (action.isNotDone()) {
+	while (! action.isDone()) {
 		action = player->play(game);
-
-		if (action.action_type == INFO) {
-			CardDisplayer::Show(action.card);
+		if (action.action_type == SHOW_TABLE) {
+			showTable();
 		}
 	}
 	game.deck.takeCard(action.card);

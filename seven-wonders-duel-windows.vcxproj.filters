@@ -138,6 +138,9 @@
     <ClCompile Include="src\display\card_displayer.cpp">
       <Filter>Source Files\display</Filter>
     </ClCompile>
+    <ClCompile Include="src\display\help_displayer.cpp">
+      <Filter>Source Files\display</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\finance\bank.h">
@@ -262,6 +265,9 @@
     </ClInclude>
     <ClInclude Include="src\deck\deck.h">
       <Filter>Header Files\deck</Filter>
+    </ClInclude>
+    <ClInclude Include="src\display\help_displayer.h">
+      <Filter>Header Files\display</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

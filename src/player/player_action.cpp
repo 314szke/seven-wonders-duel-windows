@@ -7,7 +7,16 @@ PlayerAction::PlayerAction() :
 	action_type(NO_PLAYER_ACTION)
 {}
 
-bool PlayerAction::isNotDone() const
+bool PlayerAction::isDone() const
 {
-	return (action_type == NO_PLAYER_ACTION || action_type == INFO);
+	if (action_type == TAKE) {
+		return true;
+	}
+	if (action_type == DISCARD) {
+		return true;
+	}
+	if (action_type == BUILD) {
+		return true;
+	}
+	return false;
 }

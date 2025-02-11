@@ -8,7 +8,7 @@
 
 static const std::regex PLAYER_TYPE_REGEX("[0-9]");
 static const std::regex PLAYER_NAME_REGEX("[A-Za-z]+");
-static const std::regex PLAYER_ACTION_REGEX("(t|d|b|i|(?:take)|(?:discard)|(?:build)|(?:info))\\s+([0-9][0-9]?)");
+static const std::regex PLAYER_ACTION_REGEX("(h|(?:help))|(a|(?:all))|(s|(?:show))|(?:(t|d|b|i|(?:take)|(?:discard)|(?:build)|(?:info))\\s+([0-9][0-9]?))");
 
 
 PlayerType ConsolInput::ReadPlayerOption(const PlayerID player_id)
@@ -66,32 +66,50 @@ std::string ConsolInput::ReadPlayerName(const PlayerID player_id)
 	throw CONSOL_NO_PLAYER_NAME;
 }
 
-PlayerAction ConsolInput::ReadPlayerAction()
+PlayerAction ConsolInput::ReadPlayerAction(const std::string& player_name)
 {
 	PlayerAction player_action;
 	std::string line;
 	std::smatch regex_match;
 
 	while (true) {
-		std::cout << ">> ";
+		std::cout << player_name << " >> ";
 		std::getline(std::cin, line);
 
 		if (std::regex_match(line, regex_match, PLAYER_ACTION_REGEX)) {
-			if (regex_match[1].str() == "t" || regex_match[1].str() == "take") {
+			if ((regex_match[1].str() == "h" || regex_match[1].str() == "help")) {
+				player_action.action_type = HELP;
+				return player_action;
+			} else if ((regex_match[2].str() == "a" || regex_match[2].str() == "all")) {
+				player_action.action_type = INFO_ALL;
+				return player_action;
+			} else if ((regex_match[3].str() == "s" || regex_match[3].str() == "show")) {
+				player_action.action_type = SHOW_TABLE;
+				return player_action;
+			} else if (regex_match[4].str() == "t" || regex_match[4].str() == "take") {
 				player_action.action_type = TAKE;
-			} else if (regex_match[1].str() == "d" || regex_match[1].str() == "discard") {
+			} else if (regex_match[4].str() == "d" || regex_match[4].str() == "discard") {
 				player_action.action_type = DISCARD;
-			} else if (regex_match[1].str() == "b" || regex_match[1].str() == "build") {
+			} else if (regex_match[4].str() == "b" || regex_match[4].str() == "build") {
 				player_action.action_type = BUILD;
-			} else if (regex_match[1].str() == "i" || regex_match[1].str() == "info") {
+			} else if (regex_match[4].str() == "i" || regex_match[4].str() == "info") {
 				player_action.action_type = INFO;
 			}
-			player_action.card_id = stoi(regex_match[2].str());
+			player_action.card_id = stoi(regex_match[5].str());
 			return player_action;
 		}
 		else {
-			std::cout << "WARNING: invalid input! Valid inputs: <action_type> <card_id>." << std::endl;
-			std::cout << "Action types: t or take, d or discard, b or build, i or info." << std::endl << std::endl;
+			std::cout << "WARNING: invalid input!" << std::endl << std::endl;
+			std::cout << "Valid inputs: <command>" << std::endl;
+			std::cout << "              <action_type> <card_id>" << std::endl << std::endl;
+			std::cout << "Commands:     <h or help> if you are lost" << std::endl;
+			std::cout << "              <a or all> to display all available cards for you" << std::endl;
+			std::cout << "              <s or show> to display the game table" << std::endl << std::endl;
+			std::cout << "Action types: <t or take> to take and use the card with <card_id>" << std::endl;
+			std::cout << "              <d or discard> to discard the given card with <card_id>" << std::endl;
+			std::cout << "              <b or build> to use the given card with <card_id> to build a wonder" << std::endl;
+			std::cout << "              <i or info> to display the information of the given card with <card_id>" << std::endl;
 		}
 	}
 }
+

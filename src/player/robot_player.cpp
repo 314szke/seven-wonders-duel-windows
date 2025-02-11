@@ -13,7 +13,7 @@ RobotPlayer::RobotPlayer(const PlayerID player_id, const std::string player_name
 
 PlayerAction RobotPlayer::play(const Game& game)
 {
-	std::vector<std::shared_ptr<Card>> visible_cards = game.deck.getVisibleCards();
+	std::vector<std::shared_ptr<const Card>> visible_cards = game.deck.getVisibleCards();
 	std::shuffle(visible_cards.begin(), visible_cards.end(), engine);
 
 	PlayerAction player_action;
@@ -23,7 +23,7 @@ PlayerAction RobotPlayer::play(const Game& game)
 		if (visible_cards[idx]->state == CARD_VISIBLE && game.canPayFor(*this, visible_cards[idx])) {
 			player_action.card = visible_cards[idx];
 			player_action.card_id = player_action.card->info.ID;
-			std::cout << std::endl << name << " >> t " << player_action.card_id << std::endl;
+			std::cout << name << " >> t " << player_action.card_id << std::endl;
 			return player_action;
 		}
 	}
@@ -33,7 +33,7 @@ PlayerAction RobotPlayer::play(const Game& game)
 		if (visible_cards[idx]->state == CARD_VISIBLE) {
 			player_action.card = visible_cards[idx];
 			player_action.card_id = player_action.card->info.ID;
-			std::cout << std::endl << name << " >> d " << player_action.card_id << std::endl;
+			std::cout << name << " >> d " << player_action.card_id << std::endl;
 			return player_action;
 		}
 	}
