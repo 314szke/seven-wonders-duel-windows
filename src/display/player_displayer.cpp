@@ -61,6 +61,7 @@ void PlayerDisplayer::showMaterials(const std::unique_ptr<Player>& player, const
     std::cout << PLAYER_INFO_SEPARATOR;
 
     for (const MaterialBundle& bundle : game.market.hybrid_produce[player->ID]) {
+        std::cout << " ";
         CardDisplayer::PrintHybridProduction(bundle);
     }
     std::cout << PLAYER_INFO_SEPARATOR;

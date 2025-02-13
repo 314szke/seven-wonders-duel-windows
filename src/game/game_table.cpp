@@ -50,6 +50,18 @@ uint32_t GameTable::getMilitaryPoints(const PlayerID player_id) const
     return military_points[player_id];
 }
 
+uint32_t GameTable::getMilitaryVictoryPoints(const PlayerID player_id) const
+{
+    if (military_points[player_id] > 5) {
+        return 10;
+    } else if (military_points[player_id] > 2) {
+        return 5;
+    } else if (military_points[player_id] > 0) {
+        return 2;
+    }
+    return 0;
+}
+
 bool GameTable::isMilitarySuperior(const PlayerID player_id) const
 {
     if (military_points[player_id] == 0) {

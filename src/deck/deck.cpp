@@ -72,6 +72,11 @@ const std::vector<std::shared_ptr<const Card>>& Deck::getVisibleCards() const
 	return visible_cards;
 }
 
+const std::vector<std::shared_ptr<const Card>>& Deck::getDiscardedCards() const
+{
+	return discard_pile;
+}
+
 std::shared_ptr<const Card> Deck::getCard(const uint32_t card_id) const
 {
 	return card_manager.getCard(card_id);
@@ -86,7 +91,7 @@ std::shared_ptr<const Card> Deck::getVisibleCard(const uint32_t card_id) const
 	return card;
 }
 
-void Deck::takeCard(std::shared_ptr<const Card> selected_card)
+void Deck::markCard(std::shared_ptr<const Card> selected_card)
 {
 	std::shared_ptr<Card> card = card_manager.getCard(selected_card->info.ID);
 
@@ -99,6 +104,11 @@ void Deck::takeCard(std::shared_ptr<const Card> selected_card)
 
 	makeParentVisible(card->parent_left);
 	makeParentVisible(card->parent_right);
+}
+
+void Deck::discardCard(std::shared_ptr<const Card> selected_card)
+{
+	discard_pile.push_back(selected_card);
 }
 
 bool Deck::isAgeOn() const

@@ -17,10 +17,14 @@ public:
 
 	const std::vector<std::shared_ptr<const Card>>& getCurrentDeck() const;
 	const std::vector<std::shared_ptr<const Card>>& getVisibleCards() const;
+	const std::vector<std::shared_ptr<const Card>>& getDiscardedCards() const;
+
 	std::shared_ptr<const Card> getCard(const uint32_t card_id) const;
 	std::shared_ptr<const Card> getVisibleCard(const uint32_t card_id) const;
 
-	void takeCard(std::shared_ptr<const Card> selected_card);
+	void markCard(std::shared_ptr<const Card> selected_card);
+	void discardCard(std::shared_ptr<const Card> selected_card);
+
 	bool isAgeOn() const;
 
 private:
@@ -54,4 +58,6 @@ private:
 	std::vector<std::shared_ptr<const Card>> visible_cards;
 	std::vector<std::shared_ptr<const Card>> first_row_cards;
 	std::vector<std::shared_ptr<const Card>> last_row_cards;
+
+	std::vector <std::shared_ptr<const Card>> discard_pile;
 };

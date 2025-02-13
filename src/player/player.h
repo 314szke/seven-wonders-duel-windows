@@ -19,15 +19,25 @@ protected:
 
 public:
 	virtual PlayerAction play(const Game& game) = 0;
+	
+	uint32_t getNumberOfBuiltWonders() const;
+
 	bool hasChainSymbol(const ChainSymbol symbol) const;
+	bool hasScienceSymbol(const ScienceSymbol symbol) const;
+
+	void addChainSymbol(const ChainSymbol symbol);
+	void addScienceSymbol(const ScienceSymbol symbol);
 
 	PlayerID ID;
 	std::string name;
 	uint32_t victory_points;
+	uint32_t blue_points; // in case of victory point egality, blue card points count
 
 	// These can be removed by wonders
+	std::vector<uint32_t> card_counter;
 	std::vector<std::shared_ptr<const Card>> brown_cards;
 	std::vector<std::shared_ptr<const Card>> grey_cards;
+	std::vector<std::shared_ptr<const Card>> guild_cards;
 
 	std::vector<ChainSymbol> chain_symbols;
 	std::vector<ScienceSymbol> science_symbols;

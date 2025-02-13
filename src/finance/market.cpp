@@ -19,7 +19,7 @@ Market::Market() :
     deals[ENIKO].resize(NUMBER_OF_MATERIALS, false);
 }
 
-uint32_t Market::getPurchasePrice(const PlayerID player_id, const MaterialBundle& bundle) const
+uint32_t Market::getMaterialPrice(const PlayerID player_id, const MaterialBundle& bundle) const
 {
     MaterialBundle remaining = bundle;
     remaining -= produce[player_id];

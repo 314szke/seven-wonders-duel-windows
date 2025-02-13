@@ -20,6 +20,6 @@ uint32_t Game::getPriceFor(const Player& player, std::shared_ptr<const Card> car
 	}
 
 	uint32_t price = card->cost.money;
-	price += market.getPurchasePrice(player.ID, card->cost.materials);
+	price += market.getMaterialPrice(player.ID, card->cost.materials);
 	return  price;
 }

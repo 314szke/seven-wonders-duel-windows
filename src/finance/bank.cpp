@@ -74,3 +74,8 @@ uint32_t Bank::getCardExchangeRate(const PlayerID player_id) const
     return card_exchange_rate[player_id];
 }
 
+uint32_t Bank::getMoneyVictoryPoints(const PlayerID player_id) const
+{
+    return player_money[player_id] / 3;
+}
+

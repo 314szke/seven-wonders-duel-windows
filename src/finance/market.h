@@ -15,8 +15,8 @@ class Market {
 public:
     Market();
 
-    uint32_t getPurchasePrice(const PlayerID player_id, const MaterialBundle& bundle) const;
-
+    uint32_t getMaterialPrice(const PlayerID player_id, const MaterialBundle& bundle) const;
+    
     void productionChange(const PlayerID player_id, const MaterialBundle& bundle);
     void productionDeal(const PlayerID player_id, const MaterialBundle& bundle);
     void hybridProduction(const PlayerID player_id, const MaterialBundle& bundle);

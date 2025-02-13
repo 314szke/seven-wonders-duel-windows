@@ -18,6 +18,7 @@ public:
     bool creditCheck(const PlayerID player_id, const uint32_t value) const;
     uint32_t creditInfo(const PlayerID player_id) const;
     uint32_t getCardExchangeRate(const PlayerID player_id) const;
+    uint32_t getMoneyVictoryPoints(const PlayerID player_id) const;
 
 private:
     uint32_t fund;

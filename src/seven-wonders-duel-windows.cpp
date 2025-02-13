@@ -18,4 +18,5 @@ int main()
 	while (manager.gameIsOn()) {
 		manager.handleTurn();
 	}
+	manager.declareWinner();
 }

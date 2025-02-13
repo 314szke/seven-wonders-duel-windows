@@ -15,6 +15,7 @@ public:
     void attack(const PlayerID attacker_id, const PlayerID defender_id, Bank& bank, uint32_t severity);
 
     uint32_t getMilitaryPoints(const PlayerID player_id) const;
+    uint32_t getMilitaryVictoryPoints(const PlayerID player_id) const;
     bool isMilitarySuperior(const PlayerID player_id) const;
     bool isMilitaryWinner(const PlayerID player_id) const;
 
