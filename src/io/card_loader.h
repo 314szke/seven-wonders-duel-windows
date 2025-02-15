@@ -14,7 +14,7 @@ public:
 	std::shared_ptr<Card> getCard(const uint32_t card_id);
 
 private:
-	void parseCardDetails(const uint32_t card_id, const std::smatch& match);
+	void parseCard(const uint32_t card_id, const std::smatch& match);
 
 	std::vector<std::shared_ptr<Card>> cards;
 };

@@ -3,11 +3,13 @@
 
 PlayerAction::PlayerAction() :
 	card_id(-1),
+	wonder_id(-1),
 	card(nullptr),
+	wonder(nullptr),
 	action_type(NO_PLAYER_ACTION)
 {}
 
-bool PlayerAction::isDone() const
+bool PlayerAction::isFinal() const
 {
 	if (action_type == TAKE) {
 		return true;

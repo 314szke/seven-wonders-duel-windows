@@ -16,6 +16,16 @@ void MaterialBundle::add(const int type)
     }
 }
 
+bool MaterialBundle::isEmpty() const
+{
+    for (uint32_t idx = 0; idx < NUMBER_OF_MATERIALS; idx++) {
+        if (materials[idx] > 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
 uint32_t MaterialBundle::boundedSubtraction(const uint32_t left, const uint32_t right)
 {
     if (right > left) {

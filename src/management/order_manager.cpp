@@ -21,6 +21,16 @@ OrderManager::OrderManager(const int random_seed) :
 	randomInitialization();
 }
 
+const std::vector<PlayerID>& OrderManager::getInitialPlayerOrder() const
+{
+	return initial_player_order;
+}
+
+const std::vector<uint32_t>& OrderManager::getWonderIDs() const
+{
+	return wonder_IDs;
+}
+
 const std::vector<uint32_t>& OrderManager::getVisibleCoinIDs() const
 {
 	return visible_coin_IDs;
@@ -34,11 +44,6 @@ const std::vector<uint32_t>& OrderManager::getCardIDs(const CardAgeType age) con
 		case THIRD_AGE: return third_card_IDs;
 		default: throw DECK_NOT_FOUND;
 	}
-}
-
-const std::vector<PlayerID>& OrderManager::getInitialPlayerOrder() const
-{
-	return initial_player_order;
 }
 
 void OrderManager::randomlySelect(
@@ -60,6 +65,14 @@ void OrderManager::randomlySelect(
 
 void OrderManager::randomInitialization()
 {
+	initial_player_order = { SIMON, ENIKO };
+	std::shuffle(initial_player_order.begin(), initial_player_order.end(), engine);
+
+	for (uint32_t idx = 0; idx < TOTAL_NUMBER_OF_WONDERS; idx++) {
+		wonder_IDs.push_back(idx);
+	}
+	std::shuffle(wonder_IDs.begin(), wonder_IDs.end(), engine);
+
 	int start_idx = 0;
 	int end_idx = NUMBER_OF_PROGRESS_COINS;
 	randomlySelect(visible_coin_IDs, start_idx, end_idx, NUMBER_OF_VISIBLE_COINS);
@@ -81,7 +94,4 @@ void OrderManager::randomInitialization()
 	
 	// Shuffle the guild cards into the third deck
 	std::shuffle(third_card_IDs.begin(), third_card_IDs.end(), engine);
-
-	initial_player_order = { SIMON, ENIKO };
-	std::shuffle(initial_player_order.begin(), initial_player_order.end(), engine);
 }

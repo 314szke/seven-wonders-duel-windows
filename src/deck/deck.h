@@ -2,8 +2,8 @@
 
 #include <vector>
 
-#include "card.h"
-#include "../management/card_manager.h"
+#include "../deck/card.h"
+#include "../io/card_loader.h"
 #include "../management/order_manager.h"
 
 
@@ -29,7 +29,23 @@ public:
 
 private:
 	void prepareAge();
-	void fillConstVector(std::vector<std::shared_ptr<const Card>>& const_row, const std::vector<std::shared_ptr<Card>>& tmp_row);
+
+	void fillVector(
+		std::vector<std::shared_ptr<Card>>& container,
+		const uint32_t card_number,
+		const CardAgeType card_age,
+		const CardState card_state);
+
+	void fillVector(
+		std::vector<std::shared_ptr<Card>>& container,
+		const uint32_t card_number,
+		const CardState card_state,
+		const std::vector<uint32_t>& card_IDs,
+		uint32_t* idx);
+
+	void fillConstVector(
+		std::vector<std::shared_ptr<const Card>>& const_row, 
+		const std::vector<std::shared_ptr<Card>>& tmp_row);
 
 	std::vector<std::shared_ptr<Card>> arrangeCardPyramid(
 		const std::vector<std::shared_ptr<Card>>& init_previous_row,
@@ -50,7 +66,16 @@ private:
 
 	void makeParentVisible(std::shared_ptr<Card> parent);
 
-	CardManager card_manager;
+
+	CardLoader card_loader;
+
+	const std::vector<uint32_t>& first_age_card_IDs;
+	const std::vector<uint32_t>& second_age_card_IDs;
+	const std::vector<uint32_t>& third_age_card_IDs;
+
+	uint32_t first_age_idx;
+	uint32_t second_age_idx;
+	uint32_t third_age_idx;
 
 	// First row is the first row to take cards from
 	// Last row is the last row to take cards from

@@ -12,8 +12,8 @@ Market::Market() :
     price(NUMBER_OF_PLAYERS),
     deals(NUMBER_OF_PLAYERS)
 {
-    price[SIMON].resize(NUMBER_OF_MATERIALS, 0);
-    price[ENIKO].resize(NUMBER_OF_MATERIALS, 0);
+    price[SIMON].resize(NUMBER_OF_MATERIALS, 2);
+    price[ENIKO].resize(NUMBER_OF_MATERIALS, 2);
 
     deals[SIMON].resize(NUMBER_OF_MATERIALS, false);
     deals[ENIKO].resize(NUMBER_OF_MATERIALS, false);
@@ -27,12 +27,25 @@ uint32_t Market::getMaterialPrice(const PlayerID player_id, const MaterialBundle
     return getBundlePrice(player_id, remaining);
 }
 
-void Market::productionChange(const PlayerID player_id, const MaterialBundle& bundle)
+void Market::productionIncrease(const PlayerID player_id, const MaterialBundle& bundle)
 {
     for (uint32_t idx = 0; idx < NUMBER_OF_MATERIALS; idx++) {
-        produce[player_id].materials[idx] += bundle.materials[idx];
-        recalculatePriceFor(SIMON, idx);
-        recalculatePriceFor(ENIKO, idx);
+        if (bundle.materials[idx] > 0) {
+            produce[player_id].materials[idx] += bundle.materials[idx];
+            recalculatePriceFor(SIMON, idx);
+            recalculatePriceFor(ENIKO, idx);
+        }
+    }
+}
+
+void Market::productionDecrease(const PlayerID player_id, const MaterialBundle& bundle)
+{
+    for (uint32_t idx = 0; idx < NUMBER_OF_MATERIALS; idx++) {
+        if (bundle.materials[idx] > 0) {
+            produce[player_id].materials[idx] -= bundle.materials[idx];
+            recalculatePriceFor(SIMON, idx);
+            recalculatePriceFor(ENIKO, idx);
+        }
     }
 }
 

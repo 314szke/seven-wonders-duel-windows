@@ -1,14 +1,19 @@
+
 #pragma once
 
+#include "../enums/player_id.h"
 #include "../enums/wonder_actions.h"
 #include "../finance/material_bundle.h"
 
 
 class Wonder {
 public:
-    Wonder();
-private:
+    Wonder(const uint32_t wonder_id);
+    bool isBuilt() const;
+
     uint32_t ID;
+    PlayerID player_id;
+    int build_card_id;
 
     MaterialBundle material_cost;
 
@@ -18,5 +23,5 @@ private:
     uint32_t military_point;
 
     WonderAction action;
-    MaterialBundle bound_materials;
+    MaterialBundle hybrid_materials;
 };

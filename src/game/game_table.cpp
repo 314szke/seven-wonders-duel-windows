@@ -35,12 +35,12 @@ void GameTable::attack(const PlayerID attacker_id, const PlayerID defender_id, B
     }
 
     if ((military_points[attacker_id] > FIRST_MILITARY_PENALTY) && (penalty[defender_id] < FIRST_MILITARY_PENALTY)) {
-        bank.giveMilitaryPenalty(defender_id, FIRST_MILITARY_PENALTY);
+        bank.givePenalty(defender_id, FIRST_MILITARY_PENALTY);
         penalty[defender_id] += FIRST_MILITARY_PENALTY;
     }
 
     if ((military_points[attacker_id] > SECOND_MILITARY_PENALTY) && (penalty[defender_id] < SECOND_MILITARY_PENALTY)) {
-        bank.giveMilitaryPenalty(defender_id, SECOND_MILITARY_PENALTY);
+        bank.givePenalty(defender_id, SECOND_MILITARY_PENALTY);
         penalty[defender_id] += SECOND_MILITARY_PENALTY;
     }
 }

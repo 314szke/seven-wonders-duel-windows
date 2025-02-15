@@ -29,7 +29,7 @@ CardLoader::CardLoader()
 		readLine();
 		
 		if (std::regex_match(line, match, CARD_DETAILS_PATTERN)) {
-			parseCardDetails(id, match);
+			parseCard(id, match);
 		} else {
 			throw FILE_READ_CARD_REGEX_FAIL;
 		}
@@ -56,7 +56,7 @@ std::shared_ptr<Card> CardLoader::getCard(const uint32_t card_id)
 	return cards[card_id];
 }
 
-void CardLoader::parseCardDetails(const uint32_t card_id, const std::smatch& match)
+void CardLoader::parseCard(const uint32_t card_id, const std::smatch& match)
 {
 	CardInfo info(
 		card_id,

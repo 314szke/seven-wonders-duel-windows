@@ -19,9 +19,10 @@ protected:
 
 public:
 	virtual PlayerAction play(const Game& game) = 0;
+	virtual uint32_t selectWonder(const std::vector<std::shared_ptr<const Wonder>>& wonders) = 0;
+	virtual std::shared_ptr<const Card> chooseCard(const std::vector<std::shared_ptr<const Card>>& cards) = 0;
+	virtual std::shared_ptr<const Card> chooseCardToDiscard(const std::vector<std::shared_ptr<const Card>>& cards) = 0;
 	
-	uint32_t getNumberOfBuiltWonders() const;
-
 	bool hasChainSymbol(const ChainSymbol symbol) const;
 	bool hasScienceSymbol(const ScienceSymbol symbol) const;
 

@@ -20,13 +20,17 @@ public:
     
 private:
     void initializePlayer(const PlayerID player_id);
-    
+    void wonderSelection();
+    void wonderSelectionRound();
+    void selectWonder(const PlayerID player_id, const std::vector<std::shared_ptr<const Wonder>>& wonders);
+
     void playerSwap();
     void playerAction(std::unique_ptr<Player>& player);
     
     void handleAction(std::unique_ptr<Player>& player, const PlayerAction& action);
     void handleCardColor(std::unique_ptr<Player>& player, std::shared_ptr<const Card> card);
     void handleCardGain(std::unique_ptr<Player>& player, std::shared_ptr<const Card> card);
+    void handleWonder(std::unique_ptr<Player>& player, std::shared_ptr<const Wonder> wonder);
 
     void handleGuildMoney(const GuildAction action);
     void addGuildMoneyForCard(const CardColor card_color);

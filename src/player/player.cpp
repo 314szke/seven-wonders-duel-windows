@@ -11,12 +11,6 @@ Player::Player(const PlayerID player_id, const std::string player_name) :
 	card_counter(NUMBER_OF_CARD_COLORS, 0)
 {}
 
-uint32_t Player::getNumberOfBuiltWonders() const
-{
-	// TODO
-	return 0;
-}
-
 bool Player::hasChainSymbol(const ChainSymbol symbol) const
 {
 	for (uint32_t idx = 0; idx < chain_symbols.size(); idx++) {

@@ -138,6 +138,7 @@
     <ClCompile Include="src\display\deck_displayer.cpp" />
     <ClCompile Include="src\display\help_displayer.cpp" />
     <ClCompile Include="src\display\player_displayer.cpp" />
+    <ClCompile Include="src\display\wonder_displayer.cpp" />
     <ClCompile Include="src\finance\bank.cpp" />
     <ClCompile Include="src\finance\market.cpp" />
     <ClCompile Include="src\finance\material_bundle.cpp" />
@@ -147,9 +148,10 @@
     <ClCompile Include="src\io\card_loader.cpp" />
     <ClCompile Include="src\io\consol_input.cpp" />
     <ClCompile Include="src\io\parser.cpp" />
-    <ClCompile Include="src\management\card_manager.cpp" />
+    <ClCompile Include="src\io\wonder_loader.cpp" />
     <ClCompile Include="src\management\game_manager.cpp" />
     <ClCompile Include="src\management\order_manager.cpp" />
+    <ClCompile Include="src\management\wonder_manager.cpp" />
     <ClCompile Include="src\player\consol_player.cpp" />
     <ClCompile Include="src\player\player.cpp" />
     <ClCompile Include="src\player\player_action.cpp" />
@@ -168,6 +170,7 @@
     <ClInclude Include="src\display\deck_displayer.h" />
     <ClInclude Include="src\display\help_displayer.h" />
     <ClInclude Include="src\display\player_displayer.h" />
+    <ClInclude Include="src\display\wonder_displayer.h" />
     <ClInclude Include="src\enums\card_age_types.h" />
     <ClInclude Include="src\enums\card_colors.h" />
     <ClInclude Include="src\enums\card_options.h" />
@@ -183,6 +186,7 @@
     <ClInclude Include="src\enums\progress_coin_types.h" />
     <ClInclude Include="src\enums\science_symbols.h" />
     <ClInclude Include="src\enums\wonder_actions.h" />
+    <ClInclude Include="src\enums\wonder_options.h" />
     <ClInclude Include="src\finance\bank.h" />
     <ClInclude Include="src\finance\market.h" />
     <ClInclude Include="src\finance\material_bundle.h" />
@@ -192,9 +196,10 @@
     <ClInclude Include="src\io\card_loader.h" />
     <ClInclude Include="src\io\consol_input.h" />
     <ClInclude Include="src\io\parser.h" />
-    <ClInclude Include="src\management\card_manager.h" />
+    <ClInclude Include="src\io\wonder_loader.h" />
     <ClInclude Include="src\management\game_manager.h" />
     <ClInclude Include="src\management\order_manager.h" />
+    <ClInclude Include="src\management\wonder_manager.h" />
     <ClInclude Include="src\player\consol_player.h" />
     <ClInclude Include="src\player\player.h" />
     <ClInclude Include="src\player\player_action.h" />

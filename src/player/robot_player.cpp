@@ -41,3 +41,27 @@ PlayerAction RobotPlayer::play(const Game& game)
 	throw DECK_NO_VISIBLE_CARDS;
 }
 
+uint32_t RobotPlayer::selectWonder(const std::vector<std::shared_ptr<const Wonder>>& wonders)
+{
+	for (uint32_t idx = 0; idx < wonders.size(); idx++) {
+		if (wonders[idx]->player_id == NO_PLAYER) {
+			std::cout << name << " >> " << wonders[idx]->ID << std::endl;
+			return wonders[idx]->ID;
+		}
+	}
+
+	throw NO_WONDERS_TO_SELECT;
+}
+
+std::shared_ptr<const Card> RobotPlayer::chooseCard(const std::vector<std::shared_ptr<const Card>>& cards)
+{
+	std::cout << name << " >> " << cards[0]->info.ID << std::endl;
+	return cards[0];
+}
+
+std::shared_ptr<const Card> RobotPlayer::chooseCardToDiscard(const std::vector<std::shared_ptr<const Card>>& cards)
+{
+	std::cout << name << " >> " << cards[0]->info.ID << std::endl;
+	return cards[0];
+}
+

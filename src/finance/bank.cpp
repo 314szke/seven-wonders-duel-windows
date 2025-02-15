@@ -44,7 +44,7 @@ void Bank::increaseExchangeRateFor(const PlayerID player_id)
     card_exchange_rate[player_id]++;
 }
 
-void Bank::giveMilitaryPenalty(const PlayerID player_id, const uint32_t value)
+void Bank::givePenalty(const PlayerID player_id, const uint32_t value)
 {
     if (value > player_money[player_id]) {
         fund += player_money[player_id];

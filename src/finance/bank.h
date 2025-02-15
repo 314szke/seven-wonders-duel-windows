@@ -13,7 +13,7 @@ public:
     void payTo(const PlayerID player_id, const uint32_t value);
     void exchangeCard(const PlayerID player_id);
     void increaseExchangeRateFor(const PlayerID player_id);
-    void giveMilitaryPenalty(const PlayerID player_id, const uint32_t value);
+    void givePenalty(const PlayerID player_id, const uint32_t value);
 
     bool creditCheck(const PlayerID player_id, const uint32_t value) const;
     uint32_t creditInfo(const PlayerID player_id) const;

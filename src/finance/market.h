@@ -13,16 +13,18 @@ class PlayerDisplayer;
 
 class Market {
 public:
+    friend class PlayerDisplayer;
+
     Market();
 
     uint32_t getMaterialPrice(const PlayerID player_id, const MaterialBundle& bundle) const;
     
-    void productionChange(const PlayerID player_id, const MaterialBundle& bundle);
+    void productionIncrease(const PlayerID player_id, const MaterialBundle& bundle);
+    void productionDecrease(const PlayerID player_id, const MaterialBundle& bundle);
+
     void productionDeal(const PlayerID player_id, const MaterialBundle& bundle);
     void hybridProduction(const PlayerID player_id, const MaterialBundle& bundle);
 
-    friend class PlayerDisplayer;
-    
 private:
     MaterialBundle getBestHybridProduce(const PlayerID player_id, const MaterialBundle& bundle) const;
     bool getNextPermutation(const PlayerID player_id, std::vector<uint32_t>& material_per_hybrid_produce) const;

@@ -1,6 +1,9 @@
 #pragma once
 
 constexpr auto TOTAL_NUMBER_OF_CARDS = 73;
+constexpr auto TOTAL_NUMBER_OF_WONDERS = 12;
+constexpr auto MAX_NUMBER_OF_BUILT_WONDERS = 7;
+
 constexpr auto NUMBER_OF_CARDS_PER_AGE = 20;
 constexpr auto NUMBER_OF_GUILD_CARDS_USED = 3;
 

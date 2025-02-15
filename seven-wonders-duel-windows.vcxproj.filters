@@ -108,9 +108,6 @@
     <ClCompile Include="src\deck\card_gain.cpp">
       <Filter>Source Files\deck</Filter>
     </ClCompile>
-    <ClCompile Include="src\management\card_manager.cpp">
-      <Filter>Source Files\management</Filter>
-    </ClCompile>
     <ClCompile Include="src\display\deck_displayer.cpp">
       <Filter>Source Files\display</Filter>
     </ClCompile>
@@ -139,6 +136,15 @@
       <Filter>Source Files\display</Filter>
     </ClCompile>
     <ClCompile Include="src\display\help_displayer.cpp">
+      <Filter>Source Files\display</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\wonder_loader.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\management\wonder_manager.cpp">
+      <Filter>Source Files\management</Filter>
+    </ClCompile>
+    <ClCompile Include="src\display\wonder_displayer.cpp">
       <Filter>Source Files\display</Filter>
     </ClCompile>
   </ItemGroup>
@@ -224,9 +230,6 @@
     <ClInclude Include="src\deck\card_gain.h">
       <Filter>Header Files\deck</Filter>
     </ClInclude>
-    <ClInclude Include="src\management\card_manager.h">
-      <Filter>Header Files\management</Filter>
-    </ClInclude>
     <ClInclude Include="src\enums\card_states.h">
       <Filter>Header Files\enums</Filter>
     </ClInclude>
@@ -267,6 +270,18 @@
       <Filter>Header Files\deck</Filter>
     </ClInclude>
     <ClInclude Include="src\display\help_displayer.h">
+      <Filter>Header Files\display</Filter>
+    </ClInclude>
+    <ClInclude Include="src\io\wonder_loader.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enums\wonder_options.h">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\management\wonder_manager.h">
+      <Filter>Header Files\management</Filter>
+    </ClInclude>
+    <ClInclude Include="src\display\wonder_displayer.h">
       <Filter>Header Files\display</Filter>
     </ClInclude>
   </ItemGroup>

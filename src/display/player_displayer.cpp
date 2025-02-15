@@ -6,6 +6,7 @@
 #include "../enums/chain_symbols.h"
 #include "../enums/science_symbols.h"
 #include "../display/card_displayer.h"
+#include "../display/wonder_displayer.h"
 
 
 constexpr auto PLAYER_INFO_SEPARATOR = " |";
@@ -25,6 +26,8 @@ void PlayerDisplayer::Show(const std::unique_ptr<Player>& player, const Game& ga
     showSymbols(player);
 
 	std::cout << std::endl;
+
+    WonderDisplayer::ShowIDsOnly(game.wonder_manager.getPlayerWonders(player->ID));
 }
 
 void PlayerDisplayer::showMaterials(const std::unique_ptr<Player>& player, const Game& game)

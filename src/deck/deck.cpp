@@ -7,7 +7,14 @@
 
 
 Deck::Deck(const OrderManager& order_manager) :
-	card_manager(order_manager),
+	first_age_card_IDs(order_manager.getCardIDs(FIRST_AGE)),
+	second_age_card_IDs(order_manager.getCardIDs(SECOND_AGE)),
+	third_age_card_IDs(order_manager.getCardIDs(THIRD_AGE)),
+//
+	first_age_idx(0),
+	second_age_idx(0),
+	third_age_idx(0),
+//
 	number_of_cards_taken(0)
 {}
 
@@ -17,7 +24,7 @@ void Deck::prepareTheFirstAge()
 	std::vector<std::shared_ptr<Card>> tmp_first_row;
 	std::vector<std::shared_ptr<Card>> tmp_last_row;
 
-	card_manager.fill(tmp_first_row, 6, FIRST_AGE, CARD_VISIBLE);
+	fillVector(tmp_first_row, 6, FIRST_AGE, CARD_VISIBLE);
 	fillConstVector(first_row_cards, tmp_first_row);
 	
 	tmp_last_row = arrangeCardPyramid(tmp_first_row, FIRST_AGE, 5, 2);
@@ -31,7 +38,7 @@ void Deck::prepareTheSecondAge()
 	std::vector<std::shared_ptr<Card>> tmp_first_row;
 	std::vector<std::shared_ptr<Card>> tmp_last_row;
 	
-	card_manager.fill(tmp_first_row, 2, SECOND_AGE, CARD_VISIBLE);
+	fillVector(tmp_first_row, 2, SECOND_AGE, CARD_VISIBLE);
 	fillConstVector(first_row_cards, tmp_first_row);
 
 	tmp_last_row = arrangeCardInversePyramid(tmp_first_row, SECOND_AGE, 3, 6);
@@ -46,14 +53,14 @@ void Deck::prepareTheThirdAge()
 	std::vector<std::shared_ptr<Card>> tmp_last_row;
 
 	// Inverse pyramid section
-	card_manager.fill(tmp_first_row, 2, THIRD_AGE, CARD_VISIBLE);
+	fillVector(tmp_first_row, 2, THIRD_AGE, CARD_VISIBLE);
 	std::vector<std::shared_ptr<Card>> previous_row = arrangeCardInversePyramid(tmp_first_row, THIRD_AGE, 3, 4);
 
 	// Middle section
 	std::vector<std::shared_ptr<Card>> middle_row;
-	card_manager.fill(middle_row, 2, THIRD_AGE, CARD_HIDDEN);
+	fillVector(middle_row, 2, THIRD_AGE, CARD_HIDDEN);
 	std::vector<std::shared_ptr<Card>> next_row;
-	card_manager.fill(next_row, 4, THIRD_AGE, CARD_VISIBLE_UNAVAILABLE);
+	fillVector(next_row, 4, THIRD_AGE, CARD_VISIBLE_UNAVAILABLE);
 	arrangeThirdAgeMiddleSection(previous_row, middle_row, next_row);
 
 	// Pyramid section
@@ -79,7 +86,7 @@ const std::vector<std::shared_ptr<const Card>>& Deck::getDiscardedCards() const
 
 std::shared_ptr<const Card> Deck::getCard(const uint32_t card_id) const
 {
-	return card_manager.getCard(card_id);
+	return card_loader.getCard(card_id);
 }
 
 std::shared_ptr<const Card> Deck::getVisibleCard(const uint32_t card_id) const
@@ -93,7 +100,7 @@ std::shared_ptr<const Card> Deck::getVisibleCard(const uint32_t card_id) const
 
 void Deck::markCard(std::shared_ptr<const Card> selected_card)
 {
-	std::shared_ptr<Card> card = card_manager.getCard(selected_card->info.ID);
+	std::shared_ptr<Card> card = card_loader.getCard(selected_card->info.ID);
 
 	if (card->state != CARD_VISIBLE) {
 		throw CARD_INVALID_STATE;
@@ -128,6 +135,38 @@ void Deck::prepareAge()
 	last_row_cards.resize(0);
 }
 
+void Deck::fillVector(
+	std::vector<std::shared_ptr<Card>>& container, 
+	const uint32_t card_number, 
+	const CardAgeType card_age, 
+	const CardState card_state)
+{
+	switch (card_age) {
+		case FIRST_AGE: fillVector(container, card_number, card_state, first_age_card_IDs, &first_age_idx); break;
+		case SECOND_AGE: fillVector(container, card_number, card_state, second_age_card_IDs, &second_age_idx); break;
+		case THIRD_AGE: fillVector(container, card_number, card_state, third_age_card_IDs, &third_age_idx); break;
+		default: throw DECK_NOT_FOUND;
+	}
+}
+
+void Deck::fillVector(
+	std::vector<std::shared_ptr<Card>>& container, 
+	const uint32_t card_number, 
+	const CardState card_state, 
+	const std::vector<uint32_t>& card_IDs, 
+	uint32_t* idx)
+{
+	uint32_t end_idx = (*idx + card_number);
+	if (end_idx > NUMBER_OF_CARDS_PER_AGE) {
+		throw DECK_OUT_OF_CARDS;
+	}
+
+	for (; *idx < end_idx; *idx = (*idx + 1)) {
+		container.push_back(card_loader.getCard(card_IDs[*idx]));
+		container.back()->state = card_state;
+	}
+}
+
 void Deck::fillConstVector(std::vector<std::shared_ptr<const Card>>& const_row, const std::vector<std::shared_ptr<Card>>& tmp_row)
 {
 	for (std::shared_ptr<Card> card_ptr : tmp_row) {
@@ -150,9 +189,9 @@ std::vector<std::shared_ptr<Card>> Deck::arrangeCardPyramid(
 		current_row.resize(0);
 	
 		if (face_up) {
-			card_manager.fill(current_row, cards_per_row, card_age, CARD_VISIBLE_UNAVAILABLE);
+			fillVector(current_row, cards_per_row, card_age, CARD_VISIBLE_UNAVAILABLE);
 		} else {
-			card_manager.fill(current_row, cards_per_row, card_age, CARD_HIDDEN);
+			fillVector(current_row, cards_per_row, card_age, CARD_HIDDEN);
 		}
 		face_up = !face_up;
 
@@ -188,10 +227,10 @@ std::vector<std::shared_ptr<Card>> Deck::arrangeCardInversePyramid(
 		current_row.resize(0);
 	
 		if (face_up) {
-			card_manager.fill(current_row, cards_per_row, card_age, CARD_VISIBLE_UNAVAILABLE);
+			fillVector(current_row, cards_per_row, card_age, CARD_VISIBLE_UNAVAILABLE);
 		}
 		else {
-			card_manager.fill(current_row, cards_per_row, card_age, CARD_HIDDEN);
+			fillVector(current_row, cards_per_row, card_age, CARD_HIDDEN);
 		}
 		face_up = !face_up;
 

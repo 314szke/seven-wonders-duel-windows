@@ -11,6 +11,7 @@ public:
     MaterialBundle();
 
     void add(const int material_type);
+    bool isEmpty() const;
 
     MaterialBundle& operator+=(const MaterialBundle& other_bundle)
     {                         

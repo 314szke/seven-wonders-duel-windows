@@ -12,9 +12,10 @@ public:
 	OrderManager();
 	OrderManager(const int random_seed);
 
+	const std::vector<PlayerID>& getInitialPlayerOrder() const;
+	const std::vector<uint32_t>& getWonderIDs() const;
 	const std::vector<uint32_t>& getVisibleCoinIDs() const;
 	const std::vector<uint32_t>& getCardIDs(const CardAgeType age) const;
-	const std::vector<PlayerID>& getInitialPlayerOrder() const;
 
 private:
 	void randomlySelect(
@@ -30,6 +31,7 @@ private:
 	std::mt19937 engine;
 	
 	std::vector<PlayerID> initial_player_order;
+	std::vector<uint32_t> wonder_IDs;
 	std::vector<uint32_t> visible_coin_IDs;
 
 	std::vector<uint32_t> first_card_IDs;
