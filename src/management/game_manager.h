@@ -10,7 +10,7 @@ class GameManager {
 public:
     GameManager(Game& game_ref, const OrderManager& order_manager);
     
-    void initalizeGame();
+    void initializeGame();
 
     bool gameIsOn() const;
     void showTable() const;

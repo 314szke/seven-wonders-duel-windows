@@ -21,7 +21,7 @@ GameManager::GameManager(Game& game_ref, const OrderManager& order_manager) :
 	next_player = order_manager.getInitialPlayerOrder()[1];
 }
 
-void GameManager::initalizeGame()
+void GameManager::initializeGame()
 {
 	initializePlayer(SIMON);
 	initializePlayer(ENIKO);

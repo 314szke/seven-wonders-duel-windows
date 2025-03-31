@@ -13,7 +13,7 @@ int main()
 	Game game(order_manger);
 	GameManager manager(game, order_manger);
 
-	manager.initalizeGame();
+	manager.initializeGame();
 
 	while (manager.gameIsOn()) {
 		manager.handleTurn();

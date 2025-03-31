@@ -64,7 +64,7 @@ CardGain::CardGain(
         default: action = NO_ACTION;
     }
 
-    switch (card_action) {
+    switch (card_guild_action) {
         case MONEY_POINT: guild_action = MONEY_POINT; break;
         case WONDER_POINT: guild_action = WONDER_POINT; break;
         case BROWN_GREY_POINT: guild_action = BROWN_GREY_POINT; break;

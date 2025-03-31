@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdint.h>
 #include <vector>
 
 #include "../enums/player_id.h"
