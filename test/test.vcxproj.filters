@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\finance\bank_test.cpp">
+      <Filter>finance</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="finance">
+      <UniqueIdentifier>{81f19243-ddbc-46cc-835c-6723f7ced993}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
