@@ -8,14 +8,13 @@
 #include "../enums/wonder_options.h"
 
 
-static const std::filesystem::path WONDER_FILE = "\\data\\wonders.csv";
 static const std::regex WONDER_DETAILS_PATTERN("([1-9]?[0-9]);((?:(?:[0-4],)+[0-4]));([1-9]?[0-9]);([03]);([0-9]);([0-2]);(-|[0-4]);(-|(?:(?:[0-4],)+[0-4]))\\r?\\n?");
 
 
 WonderLoader::WonderLoader()
 {
 	std::filesystem::path wonder_file_path = std::filesystem::current_path();
-	wonder_file_path += WONDER_FILE;
+	wonder_file_path = wonder_file_path / "data" / "wonders.csv";
 	f_in.open(wonder_file_path);
 	if (!f_in.is_open()) {
 		throw FILE_NOT_FOUND;

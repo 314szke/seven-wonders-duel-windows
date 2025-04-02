@@ -8,14 +8,13 @@
 #include "../constants.h"
 
 
-static const std::filesystem::path CARD_FILE = "\\data\\cards.csv";
 static const std::regex CARD_DETAILS_PATTERN("([0-9][0-9]?);([1-3]);([0-6]);([0-8]);(-|[0-4]|(?:(?:[0-4],)+[0-4]));(-|[0-9][0-9]?);(0|4|6);([0-7]);([0-3]);(0|1);(0|1);(-|[0-4]|(?:(?:[0-4],)+[0-4]));(-|[0-9][0-9]?);(-|[0-5]);(-|[0-4]);(-|[0-6])\\r?\\n?");
 
 
 CardLoader::CardLoader()
 {
 	std::filesystem::path card_file_path = std::filesystem::current_path();
-	card_file_path += CARD_FILE;
+	card_file_path = card_file_path / "data" / "cards.csv";
 	f_in.open(card_file_path);
 	if (!f_in.is_open()) {
 		throw FILE_NOT_FOUND;
